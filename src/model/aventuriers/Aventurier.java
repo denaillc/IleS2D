@@ -9,8 +9,4 @@ public abstract class Aventurier extends ObjetIdentifie {
 
 	Tuile position;
 	Collection<CarteTirage> cartesEnMain;
-        
-        
-        
-
 }
