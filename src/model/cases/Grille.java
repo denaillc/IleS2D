@@ -1,5 +1,6 @@
 package model.cases;
 
+import java.util.ArrayList;
 import util.Utils;
 
 /**
@@ -17,55 +18,88 @@ import util.Utils;
  */
 public class Grille {
 
+    ArrayList<Tuile> aPlacer;
     Tuile[][] tuiles ; // Les tuiles du jeu
     
     /** -------------------------------------------------------------------------------------------------------------
      * Constructeur
      */
     public Grille() {
+        
+        aPlacer.add(new Tuile("Nom de la TUILE"));
+        // SI C'EST UNE TUILE QUI A UN TRESOR, AJOUTER LE TRESOR DANS LE CONSTRUCTEUR
+        
+        
+        
+        
+        
+        
+        
         String nomTuile = null;
         this.tuiles = new Tuile[6][6];
         //premier ligne
         tuiles[0][0] = null;
         tuiles[0][1] = null;
-        tuiles[0][2] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[0][3] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
+        tuiles[0][2] = aPlacer.get(0);
+        tuiles[0][3] = aPlacer.get(1);
         tuiles[0][4] = null ;
         tuiles[0][5] = null ;
         //deuxieme ligne
         tuiles[1][0] = null ;
-        tuiles[1][1] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[1][2] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[1][3] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[1][4] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
+        tuiles[1][1] = aPlacer.get(2);
+        tuiles[1][2] = aPlacer.get(3);
+        tuiles[1][3] = aPlacer.get(4);
+        tuiles[1][4] = aPlacer.get(5);
         tuiles[1][5] = null ;
         //troisieme ligne
-        tuiles[2][0] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[2][1] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[2][2] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[2][3] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[2][4] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[2][5] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
+        tuiles[2][0] = aPlacer.get(6);
+        tuiles[2][1] = aPlacer.get(7);
+        tuiles[2][2] = aPlacer.get(8);
+        tuiles[2][3] = aPlacer.get(9);
+        tuiles[2][4] = aPlacer.get(10);
+        tuiles[2][5] = aPlacer.get(11);
         //quatrieme ligne 
-        tuiles[3][0] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[3][1] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[3][2] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[3][3] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[3][4] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[3][5] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
+        tuiles[3][0] = aPlacer.get(12);
+        tuiles[3][1] = aPlacer.get(13);
+        tuiles[3][2] = aPlacer.get(14);
+        tuiles[3][3] = aPlacer.get(15);
+        tuiles[3][4] = aPlacer.get(16);
+        tuiles[3][5] = aPlacer.get(17);
         //cinquième ligne 
         tuiles[4][0] = null ;
-        tuiles[4][1] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[4][2] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[4][3] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[4][4] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
+        tuiles[4][1] = aPlacer.get(18);
+        tuiles[4][2] = aPlacer.get(19);
+        tuiles[4][3] = aPlacer.get(20);
+        tuiles[4][4] = aPlacer.get(21);
         tuiles[4][5] = null ;
         // sixième ligne
         tuiles[5][0] = null ;
         tuiles[5][1] = null ;
-        tuiles[5][2] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
-        tuiles[5][3] = new Tuile(nomTuile, Utils.EtatTuile.ASSECHEE) ;
+        tuiles[5][2] = aPlacer.get(22);
+        tuiles[5][3] = aPlacer.get(23);
         tuiles[5][4] = null;
         tuiles[5][5] = null;
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    **********************************************
+//    ************ GETTERS ET SETTERS **************
+//    **********************************************
+    
+    public Tuile[][] getTuiles() {
+        return tuiles;
+    }
+
+    public void setTuiles(Tuile[][] tuiles) {
+        this.tuiles = tuiles;
+    }
+
 }
