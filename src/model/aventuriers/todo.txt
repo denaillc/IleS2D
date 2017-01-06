@@ -4,3 +4,11 @@ Le Messager peut donner des cartes Trésor à un autre joueur n'importe où sur 
 Le Navigateur peut déplacer un autre joueur d'une ou deux tuiles adjacentes pour une action. 
 Le Pilote peut, une fois par tour, voler jusqu'à n'importe quelle tuile de l'île pour une action. 
 Le Plongeur peut passer par une ou deux tuiles adjacentes inondées et/ou manquantes pour une action (il doit terminer le tour sur une tuile). 
+
+
+FINIR LE MODELE AVENTURIER
+FINIR LE MODELE CARTE
+
+
+
+
