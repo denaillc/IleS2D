@@ -22,5 +22,15 @@ public class Grille {
      */
     public Grille() {
         this.tuiles = new Tuile[6][6];
+        tuiles[0][0] = null;
+        tuiles[0][1] = null;
+        tuiles[0][2] = new Tuile
+        
+        
+               
+        
+        
+        tuiles[5][4] = null;
+        tuiles[5][5] = null;
     }
 }
