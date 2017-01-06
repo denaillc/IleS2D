@@ -8,6 +8,7 @@ Le Plongeur peut passer par une ou deux tuiles adjacentes inondées et/ou manqua
 
 FINIR LE MODELE AVENTURIER
 FINIR LE MODELE CARTE
+FINIR LE MODELE TUILE
 
 
 

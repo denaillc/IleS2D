@@ -75,6 +75,8 @@ public class VueInscription extends Observable {
         
         this.show();
         
+//        Utils.poserQuestion("Slip ou caleçon ?");
+        
     }
     
     

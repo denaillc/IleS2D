@@ -26,12 +26,9 @@ public class Grille {
      */
     public Grille() {
         
-        aPlacer.add(new Tuile("Nom de la TUILE"));
-        // SI C'EST UNE TUILE QUI A UN TRESOR, AJOUTER LE TRESOR DANS LE CONSTRUCTEUR
-        
-        
-        
-        
+        aPlacer.add(new Tuile("Héliport", Utils.Tresor.ZEPHYR));
+        aPlacer.add(new Tuile("Héliport"));
+                
         
         
         

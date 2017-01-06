@@ -1,10 +1,24 @@
+
+
+
+
+
+controller
+début création :
+donner un "rôle" à chaque aventurier (y associer le pion dans le constructeur du rôle)
+donner une position à chaque aventurier
+donner 2 cartes trésor à chaque aventurier
+tirer 6 cartes inondation
+
+
+
+
+
 package model.cases;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import model.ObjetIdentifie;
 import model.aventuriers.Aventurier;
-import util.Utils;
 import util.Utils.EtatTuile;
 
 /**
@@ -12,25 +26,9 @@ import util.Utils.EtatTuile;
  * @author IUT2-Dept Info
  */
 public class Tuile extends ObjetIdentifie {
-    private Utils.Tresor tresor;
-    private String nomTuile ;
-    private EtatTuile etatCourant;
-    private ArrayList<Aventurier> aventuriers;
-
-    public Tuile(String nomTuile) {
-        this.nomTuile = nomTuile;
-        this.etatCourant = EtatTuile.ASSECHEE;
-        aventuriers = new ArrayList<>();
-        this.tresor = null;
-    }
     
-    public Tuile(String nomTuile, Utils.Tresor tresor) {
-        this.nomTuile = nomTuile;
-        this.tresor = tresor;
-    }
-    
-    
-    
+    EtatTuile etatCourant;
+    Collection<Aventurier> aventuriers;
 
     public EtatTuile getEtatCourant() {
         return etatCourant;
@@ -44,7 +42,7 @@ public class Tuile extends ObjetIdentifie {
         return aventuriers;
     }
 
-    public void setAventuriers(ArrayList<Aventurier> aventuriers) {
+    public void setAventuriers(Collection<Aventurier> aventuriers) {
         this.aventuriers = aventuriers;
     }
     
@@ -68,3 +66,19 @@ public class Tuile extends ObjetIdentifie {
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+cc
+//    **********************************************
+//    ************ GETTERS ET SETTERS **************
+//    **********************************************

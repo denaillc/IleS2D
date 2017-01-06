@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import model.aventuriers.*;
 import model.cartes.*;
+import model.cases.*;
 import util.Utils;
 import view.*;
 
@@ -15,6 +16,7 @@ public class Controleur implements Observer {
     private ArrayList<CarteInondation> defausseInondation;
     private ArrayList<CarteTirage> piocheTirage;
     private ArrayList<CarteTirage> defausseTirage;
+    private Grille grille;
     private VueInscription VueI;
     
 
@@ -33,7 +35,8 @@ public class Controleur implements Observer {
                 VueI.terminerInscription();
             }
             
-//            System.exit(0);
+            //Debut création voir TODO
+            
 
         } else if (arg == Utils.Commandes.BOUGER) {
             
@@ -57,6 +60,7 @@ public class Controleur implements Observer {
             
         } else if (arg == Utils.Commandes.QUITTER) {
             System.exit(0);
+            
         }
         
         
