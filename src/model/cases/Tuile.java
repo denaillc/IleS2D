@@ -15,12 +15,12 @@ public class Tuile extends ObjetIdentifie {
     private Utils.Tresor tresor;
     private String nomTuile ;
     private EtatTuile etatCourant;
-    private ArrayList<Aventurier> aventuriers;
+    private ArrayList<Aventurier> aventuriersDessus;
 
     public Tuile(String nomTuile) {
         this.nomTuile = nomTuile;
         this.etatCourant = EtatTuile.ASSECHEE;
-        aventuriers = new ArrayList<>();
+        aventuriersDessus = new ArrayList<>();
         this.tresor = null;
     }
     
@@ -40,22 +40,6 @@ public class Tuile extends ObjetIdentifie {
         this.etatCourant = etatCourant;
     }
 
-    public Collection<Aventurier> getAventuriers() {
-        return aventuriers;
-    }
-
-    public void setAventuriers(ArrayList<Aventurier> aventuriers) {
-        this.aventuriers = aventuriers;
-    }
-    
-    public void ajouterAventurier(Aventurier a) {
-        aventuriers.add(a);
-    }
-    
-    public void enleverAventurier(Aventurier a) {
-        aventuriers.remove(a);
-    }
-
     public Integer getId() {
         return id;
     }
@@ -63,8 +47,38 @@ public class Tuile extends ObjetIdentifie {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Utils.Tresor getTresor() {
+        return tresor;
+    }
+
+    public void setTresor(Utils.Tresor tresor) {
+        this.tresor = tresor;
+    }
+
+    public String getNomTuile() {
+        return nomTuile;
+    }
+
+    public void setNomTuile(String nomTuile) {
+        this.nomTuile = nomTuile;
+    }
+
+    public ArrayList<Aventurier> getAventuriersDessus() {
+        return aventuriersDessus;
+    }
+
+    public void setAventuriersDessus(ArrayList<Aventurier> aventuriersDessus) {
+        this.aventuriersDessus = aventuriersDessus;
+    }
+        
+    public void ajouterAventurier(Aventurier a) {
+        aventuriersDessus.add(a);
+    }
     
-    
+    public void enleverAventurier(Aventurier a) {
+        aventuriersDessus.remove(a);
+    }
     
     
 }

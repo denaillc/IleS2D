@@ -66,12 +66,14 @@ public class Utils {
         Color bgColor ;
         Color textColor ;
         String pathPicture ;
+        boolean dejaPris;
 
         Tresor(String libelle, Color bgColor, Color textColor, String pathPicture) {
             this.libelle = libelle;
             this.bgColor = bgColor ;
             this.textColor = textColor ;
             this.pathPicture = pathPicture ;
+            this.dejaPris = false;
         }
 
         @Override
@@ -98,6 +100,16 @@ public class Utils {
             if (name.equals(CALICE.name())) return CALICE ;
             return null ;
         }
+
+        public boolean isDejaPris() {
+            return dejaPris;
+        }
+
+        public void setDejaPris(boolean dejaPris) {
+            this.dejaPris = dejaPris;
+        }
+        
+        
     }
 
     public static enum Pion {
