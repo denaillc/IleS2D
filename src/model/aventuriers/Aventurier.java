@@ -51,14 +51,13 @@ public abstract class Aventurier extends ObjetIdentifie {
         this.actionEffectuee();
     }
     
-    public void actionSpeciale(CarteHelicoptere c, Aventurier a, Tuile t) {
-        a.getPosition().enleverAventurier(a);
-        t.ajouterAventurier(a);
+    public void actionSpeciale(CarteHelicoptere c, ArrayList<Aventurier> a, Tuile t) {
+        c.jouer(a, t);
         this.cartesEnMain.remove(c);
     }
     
     public void actionSpeciale(CarteSacsDeSable c, Tuile t) {
-        t.setEtatCourant(Utils.EtatTuile.ASSECHEE);
+        c.jouer(t);
         this.cartesEnMain.remove(c);
     }
     
