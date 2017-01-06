@@ -14,7 +14,7 @@ import util.Utils;
   (3,0)   (3,1)   (3,2)   (3,3)   (3,4)   (3,5)
   null    (4,1)   (4,2)   (4,3)   (4,4)   null
   null    null    (5,2)   (5,3)   null    null
- * @author IUT2-Dept Info
+ * @author IUT2-Dept Info03
  */
 public class Grille {
 
@@ -26,11 +26,30 @@ public class Grille {
      */
     public Grille() {
         
-        aPlacer.add(new Tuile("Héliport", Utils.Tresor.ZEPHYR));
         aPlacer.add(new Tuile("Héliport"));
-                
-        
-        
+        aPlacer.add(new Tuile("La Caverne des Ombres", Utils.Tresor.CRISTAL));
+        aPlacer.add(new Tuile("La Forêt Pourpre"));
+        aPlacer.add(new Tuile("La Porte de Bronze"));
+        aPlacer.add(new Tuile("La Porte de Fer"));
+        aPlacer.add(new Tuile("La Tour de Guet"));
+        aPlacer.add(new Tuile("Le Jardin des MurMures", Utils.Tresor.ZEPHYR));
+        aPlacer.add(new Tuile("Le Marais Brumeux"));
+        aPlacer.add(new Tuile("Le Palais des Marées", Utils.Tresor.CALICE));
+        aPlacer.add(new Tuile("Le Rocher Fantôme"));
+        aPlacer.add(new Tuile("Les Falaises de L'Oubli"));
+        aPlacer.add(new Tuile("Le Temple du Soleil", Utils.Tresor.PIERRE));
+        aPlacer.add(new Tuile("L'Observatoire"));
+        aPlacer.add(new Tuile("Le Val du Crépuscule"));
+        aPlacer.add(new Tuile("Le Temple de la Lune", Utils.Tresor.PIERRE));
+        aPlacer.add(new Tuile("Les Dunes de L'Illusion"));
+        aPlacer.add(new Tuile("Le Pont des Abîmes"));
+        aPlacer.add(new Tuile("Le Palais de Corail",Utils.Tresor.CALICE));
+        aPlacer.add(new Tuile("Le Lagon Perdu"));
+        aPlacer.add(new Tuile("Le Jardin des Hurlements"));
+        aPlacer.add(new Tuile("La Porte D'Or"));
+        aPlacer.add(new Tuile("La Porte de Cuivre"));
+        aPlacer.add(new Tuile("La Porte D'argent"));
+        aPlacer.add(new Tuile("La Carverne du Brasier", Utils.Tresor.CRISTAL));
         
         String nomTuile = null;
         this.tuiles = new Tuile[6][6];
