@@ -1,6 +1,9 @@
 package model.cases;
 
 import java.util.ArrayList;
+import javafx.util.Pair;
+import model.aventuriers.Aventurier;
+import model.aventuriers.Explorateur;
 import static util.Parameters.TUILES;
 import util.Utils;
 
@@ -29,8 +32,7 @@ public class Grille {
      * Constructeur
      */
     public Grille() {
-    Utils.melangerTuile(aPlacer) ;
-    
+
         aPlacer.add(new Tuile("Héliport", TUILES+"Heliport.png", TUILES+"Heliport_Inonde.png"));
         aPlacer.add(new Tuile("La Caverne des Ombres", TUILES+"LaCaverneDesOmbres.png", TUILES+"LaCaverneDesOmbres_Inonde.png", Utils.Tresor.CRISTAL));
         aPlacer.add(new Tuile("La Forêt Pourpre", TUILES+"LaForetPourpre.png", TUILES+"LaForetPourpre_Inonde.png"));
@@ -56,7 +58,8 @@ public class Grille {
         aPlacer.add(new Tuile("La Porte D'argent", TUILES+"LaPortedArgent.png", TUILES+"LaPortedArgent_Inonde.png"));
         aPlacer.add(new Tuile("La Caverne du Brasier", TUILES+"LaCaverneDuBrasier.png", TUILES+"LaCaverneDuBrasier_Inonde.png", Utils.Tresor.CRISTAL));
         
-        String nomTuile = null;
+        Utils.melangerTuile(aPlacer);
+        
         this.tuiles = new Tuile[6][6];
         //premier ligne
         tuiles[0][0] = null;
@@ -121,6 +124,80 @@ public class Grille {
 
     public void setTuiles(Tuile[][] tuiles) {
         this.tuiles = tuiles;
+    }
+    
+    public ArrayList<Tuile> getAdjacents(Aventurier a) {
+        Tuile posJoueur = a.getPosition();
+        int posLigne = this.trouverTuile(posJoueur).getKey();
+        int posColonne = this.trouverTuile(posJoueur).getValue();
+           ArrayList<Tuile> tuilesDispo = new ArrayList<>();
+           if (a instanceof Explorateur) {
+               if (posLigne > 0 && posColonne > 0) {
+                   if (this.getTuiles()[posLigne-1][posColonne-1] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne-1][posColonne-1]); 
+                   }
+               }
+               if (posLigne < 6 && posColonne < 6) {
+                   if (this.getTuiles()[posLigne+1][posColonne+1] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne+1][posColonne+1]); 
+                   }
+               }
+               if (posLigne > 0 && posColonne < 6) {
+                   if (this.getTuiles()[posLigne-1][posColonne+1] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne-1][posColonne+1]); 
+                   }
+               }
+               if (posLigne < 6 && posColonne > 0) {
+                   if (this.getTuiles()[posLigne+1][posColonne-1] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne+1][posColonne-1]); 
+                   }
+               }
+           }
+           
+           
+               if (posLigne > 0) {
+                   if (this.getTuiles()[posLigne-1][posColonne] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne-1][posColonne]); 
+                   }
+               }
+               if (posLigne < 6) {
+                   if (this.getTuiles()[posLigne+1][posColonne] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne+1][posColonne]); 
+                   }
+               }
+               if (posColonne > 0) {
+                   if (this.getTuiles()[posLigne][posColonne-1] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne][posColonne-1]); 
+                   }
+               }
+               if (posColonne < 6) {
+                   if (this.getTuiles()[posLigne][posColonne+1] != null) {
+                       tuilesDispo.add(this.getTuiles()[posLigne][posColonne+1]); 
+                   }
+               }
+
+           return tuilesDispo;
+    }
+    
+    public Pair<Integer, Integer> trouverTuile(Tuile t) {
+        Pair p = null;
+        for (int i = 1; i <= 6; i++) {
+            for (int j = 1; j <= 6; j++) {
+                if (this.getTuiles()[i][j] == t) {
+                    p = new Pair(i,j);
+                    
+                }
+            }
+        }
+        return p;
+    }
+
+    public ArrayList<Tuile> getGrille() {
+        return aPlacer;
+    }
+
+    public void setaPlacer(ArrayList<Tuile> aPlacer) {
+        this.aPlacer = aPlacer;
     }
 
 }

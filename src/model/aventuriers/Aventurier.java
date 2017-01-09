@@ -118,6 +118,9 @@ public abstract class Aventurier extends ObjetIdentifie {
     public void resetPtsAction() {
         this.ptsAction = 3;
     }
+
+   
+    
     
  
 

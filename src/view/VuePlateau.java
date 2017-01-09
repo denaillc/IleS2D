@@ -26,7 +26,7 @@ public class VuePlateau extends Observable {
 //        window.setLocation(p);
         window.setTitle("L'île perdue");
         
-        plateau = new VueGrille(Grille g);
+//        plateau = new VueGrille(Grille g);
     }
     
     

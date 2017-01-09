@@ -8,6 +8,7 @@ import model.ObjetIdentifie;
 import model.aventuriers.*;
 import model.cartes.*;
 import model.cases.*;
+import model.cases.Grille ;
 import util.Utils;
 import view.*;
 
@@ -122,15 +123,15 @@ public class Controleur implements Observer {
         if (jCourant.getPtsAction() > 0) {        
         }
             if (action == Utils.Commandes.BOUGER) { //action est un message retourné par une vue 
-                tuilesDispo[] = jCourant.getTuilesDispoBouger();
-                if (getTuilesDispoBouger().size() > 0) {
+                tuilesDispo[] = getTuilesDispoBouger(jCourant);
+                if (getTuilesDispoBouger(jCourant).size() > 0) {
                     //demander quelle tuile il veut aller (IHM)
                     tuile = getTuileChoisie();
                     //lui afficher les case et lui faire chosir une case (IHM)
-                    for (int i = 0; i < jCourant.getTuilesDispoBouger().size(); i++) {
+                    for (int i = 0; i < getTuilesDispoBouger(jCourant).size(); i++) {
                         //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                        if (jCourant.getTuilesDispoBouger().get(i).get(Id) == getTuileChoisie().getId()) {
-                            jCourant.seDeplacer(jCourant.getTuilesDispoBouger[i]);
+                        if (getTuilesDispoBouger(jCourant).get(i).get(Id) == getTuileChoisie().getId()) {
+                            jCourant.seDeplacer(getTuilesDispoBouger(jCourant)[i]);
                             jCourant.actionEffectuee();
                         }
 
@@ -144,15 +145,15 @@ public class Controleur implements Observer {
             
  //ASSECHER           
             if (action == Utils.Commandes.ASSECHER) {
-                tuilesDispo[] = jCourant.getTuilesDispoAssecher();
-                if (getTuilesDispoAssecher().size() > 0) {
+                        tuilesDispo[] = getTuilesDispoAssecher(jCourant);
+                if (getTuilesDispoAssecher(jCourant).size() > 0) {
                     //demander quelle tuile il veut assecher (IHM)
                     tuile = getTuileChoisie();//méthode IHM
                     //lui afficher les case et lui faire chosir une case (IHM)
-                    for (int i = 0; i < jCourant.getTuilesDispoAssecher().size(); i++) {
+                    for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
                         //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                        if (jCourant.getTuilesDispoAssecher().get(i).get(Id) == getTuileChoisie().getId()) {
-                            jCourant.assecherTuile(jCourant.getTuilesDispoAssecher[i]);
+                        if (getTuilesDispoAssecher(jCourant).get(i).get(Id) == getTuileChoisie().getId()) {
+                            jCourant.assecherTuile(getTuilesDispoAssecher(jCourant)[i]);
                             jCourant.actionEffectuee();
                         }
                     }
@@ -164,17 +165,17 @@ public class Controleur implements Observer {
             }
                 
                 if (jCourant instanceof Ingénieur){
-                    if (getTuilesDispoAssecher().size() > 0) {
+                    if (getTuilesDispoAssecher(jCourant).size() > 0) {
                         //On lui demande si il veut assecher une deuxième tuile
                         // if oui
-                        tuilesDispo[] = jCourant.getTuilesDispoAssecher();
+                        tuilesDispo[] = getTuilesDispoAssecher(jCourant);
                         //demander quelle tuile il veut assecher (IHM)
                         tuile = getTuileChoisie();//méthode IHM
                         //lui afficher les case et lui faire chosir une case (IHM)
-                        for (int i = 0; i < jCourant.getTuilesDispoAssecher().size(); i++) {
+                        for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
                             //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                            if (jCourant.getTuilesDispoAssecher().get(i).get(Id) == getTuileChoisie().getId()) {
-                                jCourant.assecherTuile(jCourant.getTuilesDispoAssecher[i]);
+                            if (getTuilesDispoAssecher(jCourant).get(i).get(Id) == getTuileChoisie().getId()) {
+                                jCourant.assecherTuile(getTuilesDispoAssecher(jCourant)[i]);
                             }
                         }
                     }
@@ -183,16 +184,16 @@ public class Controleur implements Observer {
             
 //DONNER            
             if (action == Utils.Commandes.DONNER) {
-                joueursDispo[] = jCourant.getJoueursDispo();
+                joueursDispo[] = getJoueursDispo(jCourant);
                 if (getJoueursDispo().size() > 0) {
                     if (jCourant.getCartesEnMain().size() > 0){ //VERIFIER LES CARTES ACTIONS SPECIALES
                         //demander quelle joueur il veut echanger (IHM)
                         joueur = getJoueurChoisit();//méthode IHM
                         //lui afficher les joueur et lui faire chosir un joueur (IHM)
-                        for (int i = 0; i < jCourant.getJoueursDispo().size(); i++) {
+                        for (int i = 0; i < getJoueursDispo(jCourant).size(); i++) {
                             //on parcourt la liste des joueurs dispo pour comparer avec celle que le joueur a choisit
-                            if (jCourant.getJoueursDispo().get(i).get(Id) == getJoueurChoisit().getId()) {
-                                jCourant.donnerCarte(getJoueursDispo.get(i),choisirCarte());
+                            if (getJoueursDispo(jCourant).get(i).get(Id) == getJoueurChoisit().getId()) {
+                                jCourant.donnerCarte(getJoueursDispo(jCourant).get(i),choisirCarte());
                                 jCourant.actionEffectuee();
                             }
                         }
@@ -236,5 +237,11 @@ public class Controleur implements Observer {
     private Object getTuileChoisie() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private ArrayList<Tuile> getTuilesDispoAssecher(Aventurier jCourant) {
+    return grille.getAdjacents(jCourant) ;
+        }
+    
+
 
     }
