@@ -11,8 +11,30 @@ Le Plongeur peut passer par une ou deux tuiles adjacentes inondées et/ou manqua
 
 cas exceptionnels à traiter :
 BOUGER -> explorateur, pilote, plongeur
-ASSECHER -> explorateur, ingénieur
+ASSECHER -> explorateur
 DONNER CARTE -> messager
+
+
+
+
+
+
+getCarteChoisie -> à faire
+getTuileChoisie -> 
+getTuilesDispoBouger
+getTuiesDispoAssecher
+getJoueursDispo
+getCartesActionsEnMain() 
+
+
+
+
+
+
+
+
+
+
 
 
 
