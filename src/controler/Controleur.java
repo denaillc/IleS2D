@@ -90,7 +90,7 @@ public class Controleur implements Observer {
     public CarteTirage choisirCarte(){
         for (int i = 0; i <= jCourant.getCartesEnMain().size(); i++) {
 
-                if (jCourant.getCartesEnMain().get(i).getId() == getCarteChoisit(jCourant).getId()) { 
+                if (jCourant.getCartesEnMain().get(i).getId() == getCarteChoisie(jCourant).getId()) { 
                 //getCarteChoisit = > méthode IHM qui demande au joueur quel carte il choisit à Défausser/Echanger
                    return jCourant.getCartesEnMain().get(i);
                    //possibilité de mettre un booléen pour optimiser les itérations
@@ -125,11 +125,11 @@ public class Controleur implements Observer {
                 tuilesDispo[] = jCourant.getTuilesDispoBouger();
                 if (getTuilesDispoBouger().size() > 0) {
                     //demander quelle tuile il veut aller (IHM)
-                    tuile = getTuileChoisit();
+                    tuile = getTuileChoisie();
                     //lui afficher les case et lui faire chosir une case (IHM)
                     for (int i = 0; i < jCourant.getTuilesDispoBouger().size(); i++) {
                         //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                        if (jCourant.getTuilesDispoBouger().get(i).get(Id) == getTuileChoisit().getId()) {
+                        if (jCourant.getTuilesDispoBouger().get(i).get(Id) == getTuileChoisie().getId()) {
                             jCourant.seDeplacer(jCourant.getTuilesDispoBouger[i]);
                             jCourant.actionEffectuee();
                         }
@@ -147,11 +147,11 @@ public class Controleur implements Observer {
                 tuilesDispo[] = jCourant.getTuilesDispoAssecher();
                 if (getTuilesDispoAssecher().size() > 0) {
                     //demander quelle tuile il veut assecher (IHM)
-                    tuile = getTuileChoisit();//méthode IHM
+                    tuile = getTuileChoisie();//méthode IHM
                     //lui afficher les case et lui faire chosir une case (IHM)
                     for (int i = 0; i < jCourant.getTuilesDispoAssecher().size(); i++) {
                         //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                        if (jCourant.getTuilesDispoAssecher().get(i).get(Id) == getTuileChoisit().getId()) {
+                        if (jCourant.getTuilesDispoAssecher().get(i).get(Id) == getTuileChoisie().getId()) {
                             jCourant.assecherTuile(jCourant.getTuilesDispoAssecher[i]);
                             jCourant.actionEffectuee();
                         }
@@ -169,11 +169,11 @@ public class Controleur implements Observer {
                         // if oui
                         tuilesDispo[] = jCourant.getTuilesDispoAssecher();
                         //demander quelle tuile il veut assecher (IHM)
-                        tuile = getTuileChoisit();//méthode IHM
+                        tuile = getTuileChoisie();//méthode IHM
                         //lui afficher les case et lui faire chosir une case (IHM)
                         for (int i = 0; i < jCourant.getTuilesDispoAssecher().size(); i++) {
                             //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                            if (jCourant.getTuilesDispoAssecher().get(i).get(Id) == getTuileChoisit().getId()) {
+                            if (jCourant.getTuilesDispoAssecher().get(i).get(Id) == getTuileChoisie().getId()) {
                                 jCourant.assecherTuile(jCourant.getTuilesDispoAssecher[i]);
                             }
                         }
@@ -228,5 +228,13 @@ public class Controleur implements Observer {
                         }   
                 }                                               
             }
+
+    private Object getCarteChoisie(Aventurier jCourant) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Object getTuileChoisie() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     }
