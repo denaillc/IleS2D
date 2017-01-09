@@ -126,7 +126,63 @@ public class Grille {
         this.tuiles = tuiles;
     }
     
-    public ArrayList<Tuile> getAdjacents(Aventurier a) {
+    public ArrayList<Tuile> getAdjacentsAssecher(Aventurier a) {
+        Tuile posJoueur = a.getPosition();
+        int posLigne = this.trouverTuile(posJoueur).getKey();
+        int posColonne = this.trouverTuile(posJoueur).getValue();
+           ArrayList<Tuile> tuilesDispo = new ArrayList<>();
+           if (a instanceof Explorateur) {
+               if (posLigne > 0 && posColonne > 0) {
+                   if (this.getTuiles()[posLigne-1][posColonne-1] != null && this.getTuiles()[posLigne-1][posColonne-1].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne-1][posColonne-1]); 
+                   }
+               }
+               if (posLigne < 6 && posColonne < 6) {
+                   if (this.getTuiles()[posLigne+1][posColonne+1] != null && this.getTuiles()[posLigne+1][posColonne+1].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne+1][posColonne+1]); 
+                   }
+               }
+               if (posLigne > 0 && posColonne < 6) {
+                   if (this.getTuiles()[posLigne-1][posColonne+1] != null && this.getTuiles()[posLigne-1][posColonne+1].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne-1][posColonne+1]); 
+                   }
+               }
+               if (posLigne < 6 && posColonne > 0) {
+                   if (this.getTuiles()[posLigne+1][posColonne-1] != null  && this.getTuiles()[posLigne+1][posColonne-1].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne+1][posColonne-1]); 
+                   }
+               }
+           }
+           
+           
+               if (posLigne > 0) {
+                   if (this.getTuiles()[posLigne-1][posColonne] != null  && this.getTuiles()[posLigne-1][posColonne].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne-1][posColonne]); 
+                   }
+               }
+               if (posLigne < 6) {
+                   if (this.getTuiles()[posLigne+1][posColonne] != null && this.getTuiles()[posLigne+1][posColonne].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne+1][posColonne]); 
+                   }
+               }
+               if (posColonne > 0) {
+                   if (this.getTuiles()[posLigne][posColonne-1] != null && this.getTuiles()[posLigne][posColonne-1].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne][posColonne-1]); 
+                   }
+               }
+               if (posColonne < 6) {
+                   if (this.getTuiles()[posLigne][posColonne+1] != null && this.getTuiles()[posLigne][posColonne+1].getEtatCourant()==Utils.EtatTuile.INONDEE) {
+                       tuilesDispo.add(this.getTuiles()[posLigne][posColonne+1]); 
+                   }
+               }
+
+           return tuilesDispo;
+    }
+    
+    
+    
+    
+     public ArrayList<Tuile> getAdjacents(Aventurier a) {
         Tuile posJoueur = a.getPosition();
         int posLigne = this.trouverTuile(posJoueur).getKey();
         int posColonne = this.trouverTuile(posJoueur).getValue();

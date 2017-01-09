@@ -237,10 +237,21 @@ public class Controleur implements Observer {
     private Object getTuileChoisie() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+/**
+ * retourne les case inondée possible a assecher
+ * @param jCourant
+ * @return 
+ */
     private ArrayList<Tuile> getTuilesDispoAssecher(Aventurier jCourant) {
-    return grille.getAdjacents(jCourant) ;
+    return grille.getAdjacentsAssecher(jCourant) ;
         }
+/**
+ * retourne les case accesible pour se deplacer
+ * @param jCourant
+ * @return 
+ */
+    private ArrayList<Tuile> getTuilesDispoBouger(Aventurier jCourant) {
+    return grille.getAdjacents(jCourant) ;    }
     
 
 
