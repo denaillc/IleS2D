@@ -1,6 +1,7 @@
 package model.cases;
 
 import java.util.ArrayList;
+import static util.Parameters.TUILES;
 import util.Utils;
 
 /**
@@ -30,30 +31,30 @@ public class Grille {
     public Grille() {
     Utils.melangerTuile(aPlacer) ;
     
-        aPlacer.add(new Tuile("Héliport"));
-        aPlacer.add(new Tuile("La Caverne des Ombres", Utils.Tresor.CRISTAL));
-        aPlacer.add(new Tuile("La Forêt Pourpre"));
-        aPlacer.add(new Tuile("La Porte de Bronze"));
-        aPlacer.add(new Tuile("La Porte de Fer"));
-        aPlacer.add(new Tuile("La Tour de Guet"));
-        aPlacer.add(new Tuile("Le Jardin des MurMures", Utils.Tresor.ZEPHYR));
-        aPlacer.add(new Tuile("Le Marais Brumeux"));
-        aPlacer.add(new Tuile("Le Palais des Marées", Utils.Tresor.CALICE));
-        aPlacer.add(new Tuile("Le Rocher Fantôme"));
-        aPlacer.add(new Tuile("Les Falaises de L'Oubli"));
-        aPlacer.add(new Tuile("Le Temple du Soleil", Utils.Tresor.PIERRE));
-        aPlacer.add(new Tuile("L'Observatoire"));
-        aPlacer.add(new Tuile("Le Val du Crépuscule"));
-        aPlacer.add(new Tuile("Le Temple de la Lune", Utils.Tresor.PIERRE));
-        aPlacer.add(new Tuile("Les Dunes de L'Illusion"));
-        aPlacer.add(new Tuile("Le Pont des Abîmes"));
-        aPlacer.add(new Tuile("Le Palais de Corail",Utils.Tresor.CALICE));
-        aPlacer.add(new Tuile("Le Lagon Perdu"));
-        aPlacer.add(new Tuile("Le Jardin des Hurlements"));
-        aPlacer.add(new Tuile("La Porte D'Or"));
-        aPlacer.add(new Tuile("La Porte de Cuivre"));
-        aPlacer.add(new Tuile("La Porte D'argent"));
-        aPlacer.add(new Tuile("La Carverne du Brasier", Utils.Tresor.CRISTAL));
+        aPlacer.add(new Tuile("Héliport", TUILES+"Heliport.png", TUILES+"Heliport_Inonde.png"));
+        aPlacer.add(new Tuile("La Caverne des Ombres", TUILES+"LaCaverneDesOmbres.png", TUILES+"LaCaverneDesOmbres_Inonde.png", Utils.Tresor.CRISTAL));
+        aPlacer.add(new Tuile("La Forêt Pourpre", TUILES+"LaForetPourpre.png", TUILES+"LaForetPourpre_Inonde.png"));
+        aPlacer.add(new Tuile("La Porte de Bronze", TUILES+"LaPorteDeBronze.png", TUILES+"LaPorteDeBronze_Inonde.png"));
+        aPlacer.add(new Tuile("La Porte de Fer", TUILES+"LaPorteDeFer.png", TUILES+"aPorteDeFer_Inonde.png"));
+        aPlacer.add(new Tuile("La Tour de Guet", TUILES+"LaTourDuGuet.png", TUILES+"LaTourDuGuet_Inonde.png"));
+        aPlacer.add(new Tuile("Le Jardin des Murmures", TUILES+"LeJardinDesMurmures.png", TUILES+"LeJardinDesMurmures_Inonde.png", Utils.Tresor.ZEPHYR));
+        aPlacer.add(new Tuile("Le Marais Brumeux", TUILES+"LeMaraisBrumeux.png", TUILES+"LeMaraisBrumeux_Inonde.png"));
+        aPlacer.add(new Tuile("Le Palais des Marées", TUILES+"LePalaisDesMarees.png", TUILES+"LePalaisDesMarees_Inonde.png", Utils.Tresor.CALICE));
+        aPlacer.add(new Tuile("Le Rocher Fantôme", TUILES+"LeRocherFantome.png", TUILES+"LeRocherFantome_Inonde.png"));
+        aPlacer.add(new Tuile("Les Falaises de L'Oubli", TUILES+"LesFalaisesDeLOubli.png", TUILES+"LesFalaisesDeLOubli_Inonde.png"));
+        aPlacer.add(new Tuile("Le Temple du Soleil", TUILES+"LeTempleDuSoleil.png", TUILES+"LeTempleDuSoleil_Inonde.png", Utils.Tresor.PIERRE));
+        aPlacer.add(new Tuile("L'Observatoire", TUILES+"Observatoire.png", TUILES+"Observatoire_Inonde.png"));
+        aPlacer.add(new Tuile("Le Val du Crépuscule", TUILES+"LeValDuCrepuscule.png", TUILES+"LeValDuCrepuscule_Inonde.png"));
+        aPlacer.add(new Tuile("Le Temple de la Lune", TUILES+"LeTempleDeLaLune.png", TUILES+"LeTempleDeLaLune_Inonde.png", Utils.Tresor.PIERRE));
+        aPlacer.add(new Tuile("Les Dunes de L'Illusion", TUILES+"LesDunesDeLIllusion.png", TUILES+"LesDunesDeLIllusion_Inonde.png"));
+        aPlacer.add(new Tuile("Le Pont des Abîmes", TUILES+"LePontDesAbimes.png", TUILES+"LePontDesAbimes_Inonde.png"));
+        aPlacer.add(new Tuile("Le Palais de Corail", TUILES+"LePalaisDeCorail.png", TUILES+"LePalaisDeCorail_Inonde.png", Utils.Tresor.CALICE));
+        aPlacer.add(new Tuile("Le Lagon Perdu", TUILES+"LeLagonPerdu.png", TUILES+"LeLagonPerdu_Inonde.png"));
+        aPlacer.add(new Tuile("Le Jardin des Hurlements", TUILES+"LeJardinDesHurlements.png", TUILES+"LeJardinDesHurlements_Inonde.png"));
+        aPlacer.add(new Tuile("La Porte D'Or", TUILES+"LaPortedOr.png", TUILES+"LaPortedOr_Inonde.png"));
+        aPlacer.add(new Tuile("La Porte de Cuivre", TUILES+"LaPorteDeCuivre.png", TUILES+"LaPorteDeCuivre_Inonde.png"));
+        aPlacer.add(new Tuile("La Porte D'argent", TUILES+"LaPortedArgent.png", TUILES+"LaPortedArgent_Inonde.png"));
+        aPlacer.add(new Tuile("La Caverne du Brasier", TUILES+"LaCaverneDuBrasier.png", TUILES+"LaCaverneDuBrasier_Inonde.png", Utils.Tresor.CRISTAL));
         
         String nomTuile = null;
         this.tuiles = new Tuile[6][6];

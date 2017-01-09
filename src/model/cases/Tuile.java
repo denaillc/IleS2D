@@ -16,16 +16,20 @@ public class Tuile extends ObjetIdentifie {
     private String nomTuile ;
     private EtatTuile etatCourant;
     private ArrayList<Aventurier> aventuriersDessus;
+    private String cheminImage;
+    private String cheminImageInonde;
 
-    public Tuile(String nomTuile) {
+    public Tuile(String nomTuile, String cheminImage, String cheminImageInonde) {
         this.nomTuile = nomTuile;
+        this.cheminImage = cheminImage;
         this.etatCourant = EtatTuile.ASSECHEE;
         aventuriersDessus = new ArrayList<>();
         this.tresor = null;
     }
     
-    public Tuile(String nomTuile, Utils.Tresor tresor) {
+    public Tuile(String nomTuile, String cheminImage, String cheminImageInonde, Utils.Tresor tresor) {
         this.nomTuile = nomTuile;
+        this.cheminImage = cheminImage;
         this.tresor = tresor;
     }
     
@@ -79,6 +83,24 @@ public class Tuile extends ObjetIdentifie {
     public void enleverAventurier(Aventurier a) {
         aventuriersDessus.remove(a);
     }
+
+    public String getCheminImage() {
+        return cheminImage;
+    }
+
+    public void setCheminImage(String cheminImage) {
+        this.cheminImage = cheminImage;
+    }
+
+    public String getCheminImageInonde() {
+        return cheminImageInonde;
+    }
+
+    public void setCheminImageInonde(String cheminImageInonde) {
+        this.cheminImageInonde = cheminImageInonde;
+    }
+    
+    
     
     
 }
