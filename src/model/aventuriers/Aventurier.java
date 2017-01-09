@@ -62,7 +62,9 @@ public abstract class Aventurier extends ObjetIdentifie {
     }
     
     
-    
+    /**
+     * retire un point d'action
+     */
     public void actionEffectuee() {
         this.ptsAction--;
     }
@@ -108,6 +110,7 @@ public abstract class Aventurier extends ObjetIdentifie {
         return ptsAction;
     }
 
+
     public void setPtsAction(int ptsAction) {
         this.ptsAction = ptsAction;
     }
@@ -115,5 +118,7 @@ public abstract class Aventurier extends ObjetIdentifie {
     public void resetPtsAction() {
         this.ptsAction = 3;
     }
+    
+ 
 
 }

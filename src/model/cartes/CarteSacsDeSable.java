@@ -6,6 +6,10 @@ import model.cases.Tuile;
 import util.Utils;
 
 public class CarteSacsDeSable extends CarteTirage {
+
+    public CarteSacsDeSable(String nomCarte) {
+        super(nomCarte);
+    }
     
     
     public void jouer(Tuile t) {

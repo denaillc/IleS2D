@@ -6,11 +6,13 @@ import model.ObjetIdentifie;
 public abstract class CarteTirage extends ObjetIdentifie {
     
     
-    /*
-    tas de carte de tresor monté des eau et action spé
-    */
-    
+   private final String nomCarte ;
+   
 //    private ArrayList<CarteTirage> tasDeCarte ;
+
+    public CarteTirage(String nomCarte) {
+        this.nomCarte = nomCarte;
+    }
     
     
     

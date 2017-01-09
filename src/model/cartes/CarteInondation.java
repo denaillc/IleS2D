@@ -3,13 +3,17 @@ package model.cartes;
 import model.ObjetIdentifie;
 
 public class CarteInondation extends ObjetIdentifie {
-    
-    
-    private String nomCarteInondation ;
+
+
+private String nomCarteInondation ;
 
     public CarteInondation(String nomCarteInondation) {
-        this.nomCarteInondation = nomCarteInondation;
+        super();
+        this.nomCarteInondation = nomCarteInondation ;
+        
     }
+
+   
 
     CarteInondation c0 = new CarteInondation("Héliport") ;
     CarteInondation c1 = new CarteInondation("La Caverne des Ombres") ;
@@ -24,7 +28,7 @@ public class CarteInondation extends ObjetIdentifie {
     CarteInondation c10 = new CarteInondation ("Les Falaises de L'Oubli");
     CarteInondation c11 = new CarteInondation ("Le Temple du Soleil");
     CarteInondation c12 = new CarteInondation ("L'Observatoire");
-    CarteInondation c13 =  new CarteInondation ("Le Val du Crépuscule");
+    CarteInondation c13 = new CarteInondation ("Le Val du Crépuscule");
     CarteInondation c14 = new CarteInondation ("Le Temple de la Lune");
     CarteInondation c15 = new CarteInondation ("Les Dunes de L'Illusion");
     CarteInondation c16 = new CarteInondation ("Le Pont des Abîmes");

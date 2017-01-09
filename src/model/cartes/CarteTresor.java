@@ -8,12 +8,21 @@ public class CarteTresor extends CarteTirage {
     private String nomCarte ;
 //    ArrayList<CarteTirage> carteTresors ;
 
+
+
+    
+    
     public CarteTresor(String nomCarte) {
-        this.nomCarte = nomCarte;
+     super(nomCarte);
     }
+
+//    public CarteTresor() {
+//        super(null);
+//    }
     
     
-    CarteTresor pierre1 = new CarteTresor("PIERRE") ;
+    
+    CarteTresor pierre1 = new CarteTresor("PIERRE") ; 
     CarteTresor pierre2 = new CarteTresor("PIERRE") ;
     CarteTresor pierre3 = new CarteTresor("PIERRE") ;
     CarteTresor pierre4 = new CarteTresor("PIERRE") ;

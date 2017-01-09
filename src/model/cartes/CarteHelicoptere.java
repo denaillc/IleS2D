@@ -7,6 +7,10 @@ import model.cartes.CarteTirage;
 import model.cases.Tuile;
 
 public class CarteHelicoptere extends CarteTirage {
+
+    public CarteHelicoptere(String nomCarte) {
+        super(nomCarte);
+    }
     
     
     public void jouer(ArrayList<Aventurier> a, Tuile t) {
