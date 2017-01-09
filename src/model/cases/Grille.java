@@ -21,11 +21,15 @@ public class Grille {
     ArrayList<Tuile> aPlacer;
     Tuile[][] tuiles ; // Les tuiles du jeu
     
+   
+    
+    
     /** -------------------------------------------------------------------------------------------------------------
      * Constructeur
      */
     public Grille() {
-        
+    Utils.melangerTuile(aPlacer) ;
+    
         aPlacer.add(new Tuile("Héliport"));
         aPlacer.add(new Tuile("La Caverne des Ombres", Utils.Tresor.CRISTAL));
         aPlacer.add(new Tuile("La Forêt Pourpre"));
