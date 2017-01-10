@@ -29,10 +29,11 @@ public class VueAventurier extends Observable {
     
     private ImageIcon done;
     private ImageIcon give;
+    private ImageIcon get ;
     private ImageIcon move;
     private ImageIcon move_disabled;
     private ImageIcon dry;
-    private ImageIcon dry_disabled;
+    //private ImageIcon dry_disabled;
     private ImageIcon shift;
     
     public VueAventurier(Aventurier a) {
@@ -52,13 +53,83 @@ public class VueAventurier extends Observable {
         
         give = new ImageIcon(util.Parameters.ICON_GIVE);
         btnDonner = new JButton(give);
+        btnDonner.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    setChanged();
+                    notifyObservers(Utils.Commandes.DONNER);
+                    clearChanged();
+            }
+        });
+        
+//        get = new ImageIcon(util.Parameters.ICON_GET);
+//        btn = new JButton(get);  on le fait pas car pas de bouton 
+//        btn.addActionListener(new ActionListener() {
+//                public void action preformed(ActionEvent e){
+//                 setChanged();
+//                 notifyObservers(Utils.Commandes.RECEVOIR);
+//                 clearChanged();
+//                }
+//        });
+
+
+                
+        move = new ImageIcon(util.Parameters.ICON_MOVE);
+        btnDeplacer = new JButton(move);
+        btnDeplacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    setChanged();
+                    notifyObservers(Utils.Commandes.DEPLACER); // ? bouger  != deplacer
+                    clearChanged();
+            }
+        });
+        
+        move_disabled = new ImageIcon(util.Parameters.ICON_MOVE_DISABLED);
+//        btnDeplacer = new JButton(move_disabled);
+//        btnDeplacer.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                    setChanged();
+//                    notifyObservers(Utils.Commandes.DEPLACER);
+//                    clearChanged();
+//            }
+//        });
+        
+        dry = new ImageIcon(util.Parameters.ICON_DRY);
+        btnAssecher = new JButton(dry);
+        btnAssecher.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    setChanged();
+                    notifyObservers(Utils.Commandes.ASSECHER);
+                    clearChanged();
+            }
+        });
+
+        shift = new ImageIcon(util.Parameters.ICON_SHIFT);
+        btnJump = new JButton(dry) ;
+        btnJump.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setChanged();
+                notifyObservers(Utils.Commandes.BOUGER);
+                clearChanged();
+            }
+        });
+        
+        
+        
+        
         /*
         RESTE A FAIRE : 
+        GET 
+     //   GET_DIASABLED
         GIVE
         MOVE
-        MOVE_DISABLED
+       // MOVE_DISABLED
         DRY
-        DRY_DISABLED
+      //  DRY_DISABLED
         SHIFT
         */
         
