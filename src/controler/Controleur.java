@@ -269,7 +269,7 @@ public class Controleur implements Observer {
     private ArrayList<Tuile> getTuilesDispoBouger(Aventurier jCourant) {
     return grille.getAdjacents(jCourant) ;    }
 
-    private Aventurier getJoueurChoisi() {
+    private Aventurier getJoueurChoisi() { // methode ihm 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
