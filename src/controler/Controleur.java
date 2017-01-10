@@ -205,6 +205,22 @@ public class Controleur implements Observer {
             DefausserCarteJoueur(choisirCarte());
 
             //System.out.println("Resaisir une carte, la carte n'est pas valide ");     
+            
+            
+            
+            
+            /*
+            
+            Piocher 2 cartes trésor 
+            si carte montée des eaux (> VueN.setNiveau(VueN.getNiveau()++)
+            cartes dans la main du jcourant
+            retirer les cartes de la pile
+            
+            piocher cartes inond autant que le niveau d'eau
+            pour chaque carte, inonder la tuile associée (ou la couler)
+            défausser les cartes inond
+            
+            */
         }
 
         // ACTIONS 
