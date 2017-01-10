@@ -156,8 +156,8 @@ public class Controleur implements Observer {
             if (carte instanceof CarteSacsDeSable){
                 Tuile tuileAassecher = null;
                 getTuilesDispoSacDeSable();
-                //IHM Mettre les tuiles dispo en évidence
-                //Getter la case a assecher
+                //IHM Mettre les tuiles dispo en évidencee
+                //Getter la case a assecher 
                 useSacDeSable(tuileAassecher);
             }
         }
