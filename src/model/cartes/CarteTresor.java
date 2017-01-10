@@ -15,7 +15,7 @@ public class CarteTresor extends CarteTirage {
     
     
     public CarteTresor(Utils.Tresor t) {
-        super(t.name());
+        super(t.name(), t.getPathPicture());
         this.tresor = t;
     }
 

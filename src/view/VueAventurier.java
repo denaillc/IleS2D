@@ -1,17 +1,21 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.aventuriers.Aventurier;
+import model.cartes.CarteTirage;
 import util.Utils;
  
 public class VueAventurier extends Observable {
@@ -24,16 +28,6 @@ public class VueAventurier extends Observable {
     private JPanel mainPanel;
     private JPanel panelCentre;
     private JPanel panelDroite;
-    
-    private JLabel carte1;
-    private JLabel carte2;
-    private JLabel carte3;
-    private JLabel carte4;
-    private JLabel carte5;
-    private JLabel carte6;
-    private JLabel carte7;
-    private JLabel carte8;
-    private JLabel carte9;
     
     private JButton btnTerminer;
     private JButton btnDonner;
@@ -166,15 +160,7 @@ public class VueAventurier extends Observable {
         panelDroite = new JPanel(new GridLayout(4,2));
         mainPanel = new JPanel(new BorderLayout());
 
-        panelCentre.add(carte1 = new JLabel("carte n°1"));
-        panelCentre.add(carte2 = new JLabel("carte n°2"));
-        panelCentre.add(carte3 = new JLabel("carte n°3"));
-        panelCentre.add(carte4 = new JLabel("carte n°4"));
-        panelCentre.add(carte5 = new JLabel("carte n°5"));
-        panelCentre.add(carte6 = new JLabel("carte n°6"));
-        panelCentre.add(carte7 = new JLabel("carte n°7"));
-        panelCentre.add(carte8 = new JLabel("carte n°8"));
-        panelCentre.add(carte9 = new JLabel("carte n°9"));
+        actualiserCartes();
 
         panelDroite.add(btnDeplacer);
         panelDroite.add(btnDonner);
@@ -194,7 +180,14 @@ public class VueAventurier extends Observable {
             
     
     private void actualiserCartes() {
-        
+        panelCentre.removeAll();
+        for(CarteTirage c : a.getCartesEnMain()) {
+            ImageIcon imgCarte = new ImageIcon(this.a.getCartesEnMain().get(0).getCheminImage());
+            imgCarte.setImage(imgCarte.getImage().getScaledInstance(150, 150, 110)); //Crée une instance 100x100 de l'image
+            JLabel labelCarte = new JLabel(imgCarte);
+            labelCarte.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            panelCentre.add(labelCarte);
+        }
     }
     
     

@@ -8,8 +8,8 @@ import model.cases.Tuile;
 
 public class CarteHelicoptere extends CarteTirage {
 
-    public CarteHelicoptere(String nomCarte) {
-        super(nomCarte);
+    public CarteHelicoptere() {
+        super("Hélicoptère", util.Parameters.CARTES+"Helicoptere.png");
     }
     
     

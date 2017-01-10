@@ -6,7 +6,7 @@ import model.cartes.CarteTirage;
 public class CarteMonteeDesEaux extends CarteTirage {
 
     public CarteMonteeDesEaux(String nomCarte) {
-        super(nomCarte);
+        super(nomCarte, util.Parameters.CARTES+"MonteeDesEaux.png");
     }
 
     
