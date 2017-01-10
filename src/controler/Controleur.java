@@ -331,29 +331,29 @@ public class Controleur implements Observer {
     
     private void initialiserPiocheInondation() {
     piocheInondation.add(new CarteInondation("Héliport", IMAGES+"Heliport.png"));
-//    CarteInondation c1 = new CarteInondation("La Caverne des Ombres") ;
-//    CarteInondation c2 = new CarteInondation("La Forêt Pourpre");
-//    CarteInondation c3 = new CarteInondation("La Porte de Bronze");
-//    CarteInondation c4 = new CarteInondation("La Porte de Fer");
-//    CarteInondation c5 = new CarteInondation("La Tour de Guet");
-//    CarteInondation c6 = new CarteInondation("Le Jardin des MurMures");
-//    CarteInondation c7 = new CarteInondation("Le Marais Brumeux");
-//    CarteInondation c8 = new CarteInondation("Le Palais des Marées");
-//    CarteInondation c9 = new CarteInondation("Le Rocher Fantôme");
-//    CarteInondation c10 = new CarteInondation("Les Falaises de L'Oubli");
-//    CarteInondation c11 = new CarteInondation("Le Temple du Soleil");
-//    CarteInondation c12 = new CarteInondation("L'Observatoire");
-//    CarteInondation c13 = new CarteInondation("Le Val du Crépuscule");
-//    CarteInondation c14 = new CarteInondation("Le Temple de la Lune");
-//    CarteInondation c15 = new CarteInondation("Les Dunes de L'Illusion");
-//    CarteInondation c16 = new CarteInondation("Le Pont des Abîmes");
-//    CarteInondation c17 = new CarteInondation("Le Palais de Corail");
-//    CarteInondation c18 = new CarteInondation("Le Lagon Perdu");
-//    CarteInondation c19 = new CarteInondation("Le Jardin des Hurlements");
-//    CarteInondation c20 = new CarteInondation("La Porte D'Or");
-//    CarteInondation c21 = new CarteInondation("La Porte de Cuivre");
-//    CarteInondation c22 = new CarteInondation("La Porte D'argent");
-//    CarteInondation c23 = new CarteInondation("La Caverne du Brasier");
+    CarteInondation c1 = new CarteInondation("La Caverne des Ombres",IMAGES+"LaCaverneDesOmbres.png") ;
+    CarteInondation c2 = new CarteInondation("La Forêt Pourpre",IMAGES+"LaFpretPourpre.png");
+    CarteInondation c3 = new CarteInondation("La Porte de Bronze",IMAGES+"LaForetDeBronze.png");
+    CarteInondation c4 = new CarteInondation("La Porte de Fer",IMAGES+"LaPorteDeFer.png");
+    CarteInondation c5 = new CarteInondation("La Tour de Guet",IMAGES+"LaTourDeGuet.png");
+    CarteInondation c6 = new CarteInondation("Le Jardin des MurMures",IMAGES+"LeJardinDesMurmures.png");
+    CarteInondation c7 = new CarteInondation("Le Marais Brumeux",IMAGES+"LeMaraisBrumeux.png");
+    CarteInondation c8 = new CarteInondation("Le Palais des Marées",IMAGES+"LePalaisDesMarees.png");
+    CarteInondation c9 = new CarteInondation("Le Rocher Fantôme",IMAGES+"LeRocherFantome.png");
+    CarteInondation c10 = new CarteInondation("Les Falaises de L'Oubli",IMAGES+"LesFalaisesDeLOubli.png");
+    CarteInondation c11 = new CarteInondation("Le Temple du Soleil",IMAGES+"LeTempleDuSoleil.png");
+    CarteInondation c12 = new CarteInondation("L'Observatoire",IMAGES+"Observatoire.png");
+    CarteInondation c13 = new CarteInondation("Le Val du Crépuscule",IMAGES+"LeValDuCrepuscule.png");
+    CarteInondation c14 = new CarteInondation("Le Temple de la Lune",IMAGES+"LeTempleDeLaLune.png");
+    CarteInondation c15 = new CarteInondation("Les Dunes de L'Illusion",IMAGES+"LesDunesDeLIllusion.png");
+    CarteInondation c16 = new CarteInondation("Le Pont des Abîmes",IMAGES+"LePontDesAbime.png");
+    CarteInondation c17 = new CarteInondation("Le Palais de Corail",IMAGES+"LePalaisDeCorail.png");
+    CarteInondation c18 = new CarteInondation("Le Lagon Perdu",IMAGES+"LeLagonPerdu.png");
+    CarteInondation c19 = new CarteInondation("Le Jardin des Hurlements",IMAGES+"LeJardinDesHurlements.png");
+    CarteInondation c20 = new CarteInondation("La Porte D'Or",IMAGES+"LaPorteDOr.png");
+    CarteInondation c21 = new CarteInondation("La Porte de Cuivre",IMAGES+"LaPorteDeCuivre.png");
+    CarteInondation c22 = new CarteInondation("La Porte D'argent",IMAGES+"LaPortedArgent.png");
+    CarteInondation c23 = new CarteInondation("La Caverne du Brasier",IMAGES+"CaverneDuBrasier.png");
     
     
         this.piocheInondation = new ArrayList<>();
