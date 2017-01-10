@@ -479,7 +479,39 @@ public class Controleur implements Observer {
         tuile.setEtatCourant(Utils.EtatTuile.ASSECHEE);
     }
     
+     private void tirerCarteTresor(){
+        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size()));
+        defausseTresor.remove(defausseTresor.size());
+        
+        while (defausseTresor.get(defausseTresor.size()) instanceof CarteMonteeDesEaux){
+            //MELANGER la carte
+        }
+        
+        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size()));
+        defausseTresor.remove(defausseTresor.size());
+    }
     
+    private void tirerCarteInnondation(){
+        for (int i=0; i< VueN.getNiveau(); i++){
+            innonder(piocheInondation.get(piocheInondation.size()));
+            piocheInondation.remove(piocheInondation.size());
+            defausseInondation.add(piocheInondation.get(piocheInondation.size()));
+        }
+    }
+
+    private void innonder(CarteInondation carte) {
+        for (int i=0; i<grille.getGrille().size();i++){
+            if (grille.getGrille().get(i).getNomTuile() == carte.getNomCarte()){
+                if (grille.getGrille().get(i).getEtatCourant() == Utils.EtatTuile.ASSECHEE)
+                grille.getGrille().get(i).setEtatCourant(Utils.EtatTuile.INONDEE);
+                if (grille.getGrille().get(i).getEtatCourant() == Utils.EtatTuile.INONDEE){
+                    grille.getGrille().get(i).setEtatCourant(Utils.EtatTuile.COULEE);
+                    defausseInondation.remove(carte);
+                }
+            }
+            
+        }
+    }
     
         private ArrayList<Tuile> getTuilesDispoAssecher(Aventurier jCourant) {
         return grille.getAdjacentsAssecher(jCourant);
