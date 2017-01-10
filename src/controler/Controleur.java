@@ -225,14 +225,14 @@ public class Controleur implements Observer {
 //RECUPERER TRESOR
             if (action == Utils.Commandes.RECUPERER_TRESOR) {
                 boolean tresorRecup = false;
-                if(jCourant.getPosition().getTresor()!= null){    // Si la tuile sur laquelle le joueur est possède un trésor            
-                    for (int i = 0; i < joueurs.size(); i++) { 
-                        if (joueurs.get(i).getTresorsPossedes().contains(jCourant.getPosition().getTresor()) ){
-                            tresorRecup = true;
-                        }
+               // if(jCourant.getPosition().getTresor()!= null){    // Si la tuile sur laquelle le joueur est possède un trésor            
+                //    for (int i = 0; i < joueurs.size(); i++) { 
+                 //       if (joueurs.get(i).getTresorsPossedes().contains(jCourant.getPosition().getTresor()) ){
+                 //           tresorRecup = true;
+                 //       }
                         
                        
-                    }
+                //    }
                   if (tresorRecup){
                         //Demander si le joueur veut récupérer le trésor
                                 //SI OUI
@@ -242,7 +242,7 @@ public class Controleur implements Observer {
                         else {
                             //Le trésor a déjà été récupéré
                         }   
-                }                                               
+                //}                                               
             }
     }
 
