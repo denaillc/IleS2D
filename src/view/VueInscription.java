@@ -96,6 +96,7 @@ public class VueInscription extends Observable {
         panelCentre2.add(btnQuitter);
         mainPanel.add(panelCentre2, BorderLayout.CENTER);
         window.validate();
+        this.hide();
     }  
     
     

@@ -7,7 +7,7 @@ import util.Utils;
 
 public class Messager extends Aventurier {
 
-    public Messager(Utils.Pion pion, Tuile position) {
-        super(pion, position);
+    public Messager(String pseudo, Utils.Pion pion, Tuile position) {
+        super(pseudo, pion, position);
     }
 }

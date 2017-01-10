@@ -7,8 +7,8 @@ import util.Utils;
 
 public class Explorateur extends Aventurier {
 
-    public Explorateur(Utils.Pion pion, Tuile position) {
-        super(pion, position);
+    public Explorateur(String pseudo, Utils.Pion pion, Tuile position) {
+        super(pseudo, pion, position);
     }
     
     

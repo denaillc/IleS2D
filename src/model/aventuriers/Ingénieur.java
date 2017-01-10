@@ -7,7 +7,7 @@ import util.Utils;
 
 public class Ingénieur extends Aventurier {
 
-    public Ingénieur(Utils.Pion pion, Tuile position) {
-        super(pion, position);
+    public Ingénieur(String pseudo, Utils.Pion pion, Tuile position) {
+        super(pseudo, pion, position);
     }
 }

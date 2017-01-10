@@ -1,17 +1,21 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.aventuriers.Aventurier;
+import model.cartes.CarteTirage;
 import util.Utils;
  
 public class VueAventurier extends Observable {
@@ -24,16 +28,6 @@ public class VueAventurier extends Observable {
     private JPanel mainPanel;
     private JPanel panelCentre;
     private JPanel panelDroite;
-    
-    private JFrame carte1 = new JFrame();
-    private JFrame carte2 = new JFrame();
-    private JFrame carte3 = new JFrame();
-    private JFrame carte4 = new JFrame();
-    private JFrame carte5 = new JFrame();
-    private JFrame carte6 = new JFrame();
-    private JFrame carte7 = new JFrame();
-    private JFrame carte8 = new JFrame();
-    private JFrame carte9 = new JFrame();
     
     private JButton btnTerminer;
     private JButton btnDonner;
@@ -56,6 +50,10 @@ public class VueAventurier extends Observable {
     public VueAventurier(Aventurier a) {
         this.a = a;
         window = new JFrame();
+        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.setSize(500,400);
+        window.setLocation(1000,500);
+        window.setTitle("Au tour de " + a.getPseudo());
         
         done = new ImageIcon(util.Parameters.ICON_DONE);
         btnTerminer = new JButton(done);
@@ -126,7 +124,7 @@ public class VueAventurier extends Observable {
         });
 
         shift = new ImageIcon(util.Parameters.ICON_SHIFT);
-        btnJump = new JButton(dry) ;
+        btnJump = new JButton(shift) ;
         btnJump.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,24 +134,37 @@ public class VueAventurier extends Observable {
             }
         });
         
+        btnHelico = new JButton("Hélicoptère");
+        btnJump.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setChanged();
+                notifyObservers(Utils.Commandes.JOUER_HELICO);
+                clearChanged();
+            }
+        });
+        
+        btnSacDeSable = new JButton("Sac de Sable");
+        btnSacDeSable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setChanged();
+                notifyObservers(Utils.Commandes.JOUER_SDS);
+                clearChanged();
+            }
+        });
+        
+        
         
         panelCentre = new JPanel(new GridLayout(3,3));
-        panelDroite = new JPanel(new GridLayout(6,1));
+        panelDroite = new JPanel(new GridLayout(4,2));
         mainPanel = new JPanel(new BorderLayout());
 
-        panelCentre.add(carte1);
-        panelCentre.add(carte2);
-        panelCentre.add(carte3);
-        panelCentre.add(carte4);
-        panelCentre.add(carte5);
-        panelCentre.add(carte6);
-        panelCentre.add(carte7);
-        panelCentre.add(carte8);
-        panelCentre.add(carte9);
+        actualiserCartes();
 
         panelDroite.add(btnDeplacer);
-        panelDroite.add(btnAssecher);
         panelDroite.add(btnDonner);
+        panelDroite.add(btnAssecher);
         panelDroite.add(btnRecupTresor);
         panelDroite.add(btnHelico);
         panelDroite.add(btnSacDeSable);
@@ -162,11 +173,29 @@ public class VueAventurier extends Observable {
         
         mainPanel.add(panelCentre, BorderLayout.CENTER);
         mainPanel.add(panelDroite, BorderLayout.EAST);
-
+        
+        window.add(mainPanel);
+        this.show();
     }
             
     
     private void actualiserCartes() {
-        
+        panelCentre.removeAll();
+        for(CarteTirage c : a.getCartesEnMain()) {
+            ImageIcon imgCarte = new ImageIcon(this.a.getCartesEnMain().get(0).getCheminImage());
+            imgCarte.setImage(imgCarte.getImage().getScaledInstance(150, 150, 110)); //Crée une instance 100x100 de l'image
+            JLabel labelCarte = new JLabel(imgCarte);
+            labelCarte.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            panelCentre.add(labelCarte);
+        }
+    }
+    
+    
+    public void show() {
+        this.window.setVisible(true);
+    }
+    
+    public void hide() {
+        this.window.setVisible(false);
     }
 }
