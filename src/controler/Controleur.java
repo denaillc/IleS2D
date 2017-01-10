@@ -66,6 +66,15 @@ public class Controleur implements Observer {
 //                VueP.show();
 
                 J1 = new Explorateur(VueI.getPseudo1().getText(), Utils.Pion.VERT, grille.getTuiles()[3][3]);
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
+                J1.getCartesEnMain().add(new CarteHelicoptere());
                 VueJoueur1 = new VueAventurier(J1);
                 VueJoueur1.addObserver(this);
             }
