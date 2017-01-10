@@ -138,9 +138,39 @@ public class Controleur implements Observer {
      * se défausse de la carte en paramètre puis la place dans la defause de
      * carte
      */
-    public void seDefausser(CarteTirage carte) {
+    public void DefausserCarteJoueur(CarteTirage carte) {
         jCourant.getCartesEnMain().remove(carte);
         defausseTresor.add(carte);
+        if (carte instanceof CarteHelicoptere || carte instanceof CarteSacsDeSable){
+            boolean use = false;
+            Tuile tuileDepart = null;
+            Tuile tuileArrivee = null;
+            ArrayList<Aventurier> joueursChoisis = new ArrayList<>();
+            
+        //Demander utiliser effet
+        if (use){
+            if (carte instanceof CarteHelicoptere){
+                getTuilesDispoHelico();
+                //IHM Mettre tuiles dispo en évidence
+                //Getter la case de départ
+                tuileDepart.getAventuriersDessus();
+                //IHM Mettre les joueurs en évidence     
+                //Getter le ou les joueurs = joueursChoisis
+                getTuilesDispoHelico().remove(tuileDepart);
+                //IHM Mettre les cases arrivées en évidence
+                //Getter la case arrivée
+                useHelico(tuileDepart, tuileArrivee, joueursChoisis);
+            }
+            
+            if (carte instanceof CarteSacsDeSable){
+                Tuile tuileAassecher = null;
+                getTuilesDispoSacDeSable();
+                //IHM Mettre les tuiles dispo en évidence
+                //Getter la case a assecher
+                useSacDeSable(tuileAassecher);
+            }
+        }
+    }
     }
 
     /**
@@ -154,7 +184,7 @@ public class Controleur implements Observer {
         for (int i = 0; i <= jCourant.getCartesEnMain().size(); i++) {
 
             if (jCourant.getCartesEnMain().get(i).getId() == getCarteChoisie(jCourant).getId()) {
-                //getCarteChoisit = > méthode IHM qui demande au joueur quel carte il choisit à Défausser/Echanger
+                //getCarteChoisie = > méthode IHM qui demande au joueur quel carte il choisit à Défausser/Echanger
                 c = jCourant.getCartesEnMain().get(i);
                 //possibilité de mettre un booléen pour optimiser les itérations
             }
@@ -171,7 +201,7 @@ public class Controleur implements Observer {
 //            // Pour la version texte mais après on aura un ihm qui nous donnera directement une carte
 //            //if(getCarteaDefausse(jCourant).getId()==jCourant.getCartesEnMain().)
 
-            seDefausser(choisirCarte());
+            DefausserCarteJoueur(choisirCarte());
 
             //System.out.println("Resaisir une carte, la carte n'est pas valide ");     
         }
@@ -373,6 +403,39 @@ public class Controleur implements Observer {
 
     private void initialiserPiocheTresor() {
         
+    }
+
+    private ArrayList<Tuile> getTuilesDispoHelico() {
+        ArrayList<Tuile> casesDispo = new ArrayList<>();
+        for (int i = 0; i<grille.getGrille().size();i++){
+            if (grille.getGrille().get(i).getEtatCourant() == Utils.EtatTuile.ASSECHEE || grille.getGrille().get(i).getEtatCourant() == Utils.EtatTuile.INONDEE){
+                casesDispo.add(grille.getGrille().get(i));
+            }
+        }
+        casesDispo.remove(jCourant.getPosition());
+        return casesDispo;
+    }
+
+    private void useHelico (Tuile tuileDepart, Tuile tuileArrivee, ArrayList<Aventurier> joueurs) {
+        for (int i = 0; i<joueurs.size ();i++){
+        joueurs.get(i).setPosition(tuileArrivee);
+        tuileDepart.enleverAventurier(joueurs.get(i));
+        //Mettre à jour IHM
+         }
+    }
+
+    private ArrayList<Tuile> getTuilesDispoSacDeSable() {
+        ArrayList<Tuile> casesDispo = new ArrayList<>();
+        for (int i = 0; i<grille.getGrille().size();i++){
+            if (grille.getGrille().get(i).getEtatCourant() == Utils.EtatTuile.INONDEE){
+                casesDispo.add(grille.getGrille().get(i));
+            }
+        }
+        return casesDispo;
+    }
+
+    private void useSacDeSable(Tuile tuile) {
+        tuile.setEtatCourant(Utils.EtatTuile.ASSECHEE);
     }
 
 }
