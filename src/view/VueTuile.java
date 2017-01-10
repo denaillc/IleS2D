@@ -3,7 +3,9 @@ package view;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.aventuriers.Aventurier;
 import model.cases.Tuile;
+import util.Parameters;
 
 public class VueTuile extends JPanel {
     
@@ -35,6 +37,21 @@ public class VueTuile extends JPanel {
         this.removeAll();
         this.add(labelInonde);
     }
+    
+    private void actualiserAventuriers() {
+        for (Aventurier a : t.getAventuriersDessus()) {
+            ImageIcon imgAventurier = new ImageIcon(Parameters.PIONS+a.getPion().getPath());
+            JLabel labelAventurier = new JLabel(imgAventurier);
+            this.add(labelAventurier);
+        }
+//        ATTENTION LES PIONS VONT S'ENPILER -> LES SEPARER SUR LA CASE
+    }
+    
+    
+    
+    
+    
+    
 
     public Tuile getT() {
         return t;

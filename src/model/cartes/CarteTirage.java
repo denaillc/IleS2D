@@ -13,8 +13,19 @@ public abstract class CarteTirage extends ObjetIdentifie {
     public CarteTirage(String nomCarte) {
         this.nomCarte = nomCarte;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNomCarte() {
+        return nomCarte;
+    }
     
     
-    
-    
+        
 }

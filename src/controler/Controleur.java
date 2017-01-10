@@ -18,22 +18,34 @@ public class Controleur implements Observer {
     private ArrayList<Aventurier> joueurs;
     private ArrayList<CarteInondation> piocheInondation;
     private ArrayList<CarteInondation> defausseInondation;
-    private ArrayList<CarteTirage> piocheTirage;
-    private ArrayList<CarteTirage> defausseTirage;
+    private ArrayList<CarteTirage> piocheTresor;
+    private ArrayList<CarteTirage> defausseTresor;
     private Grille grille;
     private Aventurier jCourant;
 
     private VueInscription VueI;
     private VuePlateau VueP;
+    private VueNiveau VueN;
 
     public Controleur() {
+        
+        
+        
+        
+        
         VueI = new VueInscription();
         VueI.addObserver(this);
 
         grille = new Grille();
+        initialiserPiocheInondation();
+        initialiserPiocheTresor();
 
         VueP = new VuePlateau(grille);
         VueP.addObserver(this);
+        
+        
+        
+//        VueN = new VueNiveau(4);
     }
 
     @Override
@@ -78,6 +90,17 @@ public class Controleur implements Observer {
         } else if (arg == Utils.Commandes.QUITTER) {
             System.exit(0);
 
+        } else if (arg == Utils.Commandes.PIOCHER_INONDATION) {
+            
+        } else if (arg == Utils.Commandes.PIOCHER_TRESOR) {
+            
+        }
+        
+        
+        
+        
+        if (o instanceof VueAventurier) {
+            
         }
 
 //        public void ValidationJoueurs() {
@@ -97,7 +120,7 @@ public class Controleur implements Observer {
      */
     public void seDefausser(CarteTirage carte) {
         jCourant.getCartesEnMain().remove(carte);
-        defausseTirage.add(carte);
+        defausseTresor.add(carte);
     }
 
     /**
@@ -221,50 +244,42 @@ public class Controleur implements Observer {
 
          */
         if (action == Utils.Commandes.RECUPERER_TRESOR) {
-            boolean tresorRecup = false;
-            // if(jCourant.getPosition().getTresor()!= null){    // Si la tuile sur laquelle le joueur est possède un trésor            
-            //    for (int i = 0; i < joueurs.size(); i++) { 
-            //       if (joueurs.get(i).getTresorsPossedes().contains(jCourant.getPosition().getTresor()) ){
-            //           tresorRecup = true;
-            //       }
-
-            //    }
-            if (tresorRecup) {
-                //Demander si le joueur veut récupérer le trésor
-                //SI OUI
+            Utils.Tresor t = jCourant.getPosition().getTresor();
+            if (tresorDispo(t)) {
+                CarteTresor c = new CarteTresor(t);
+                for (int i = 0; i < 4; i++) {
+                    jCourant.defausser(c);
+                }
                 jCourant.gagnerTresor();
                 jCourant.actionEffectuee();
-            } else {
-                //Le trésor a déjà été récupéré
+                t.setDejaPris(true);
             }
-            //}                                               
         }
     }
 
     private boolean tresorDispo(Utils.Tresor t) {
         boolean var = false;
-        // if(  (jCourant.getPosition().getEtatCourant()!= (Utils.EtatTuile.INONDEE && != Utils.EtatTuile.COULEE)  ){  // verifie que la tuille n'est pas coulée
-        if (jCourant.getPosition().getEtatCourant() != Utils.EtatTuile.INONDEE) {
-            if (jCourant.getPosition().getEtatCourant() != Utils.EtatTuile.COULEE) {
-
-                if (jCourant.getPosition().getTresor() != null) { // Si la tuile sur laquelle le joueur est possède un trésor            
-                    for (int i = 0; i < jCourant.getCartesEnMain().size(); i++) {
-                        if (jCourant.getCartesEnMain().get(i).getNomCarte() == Utils.Tresor.getFromName(t.toString())) { // le nom de la carte soit egal a to string du tresor
-
-                                            for (int y = 0; i < joueurs.size(); y++) { //double boucle pour vefiier si les joueur n'ont pas déja le tresor
-                                                for (int j = 0; j < joueurs.size(); j++) {
-                                                    if (joueurs.get(i).getTresorsPossedes().get(j) != t) { // les joueurs n'ont pas déja le tresor
-
-                                                    }
-                                                }
-                                            }
-                        }
+        if (jCourant.getPosition().getEtatCourant() != Utils.EtatTuile.COULEE) {
+            if (jCourant.getPosition().getTresor() != null) { // Si la tuile sur laquelle le joueur est possède un trésor            
+                if (t.isDejaPris()) {
+                    if (cartesTresorx4(jCourant, t)) {
+                        var = true;
                     }
-
                 }
             }
         }
-        return false;
+        return var;
+    }
+
+    private boolean cartesTresorx4(Aventurier a, Utils.Tresor t) {
+        int i = 0;
+        CarteTresor te = new CarteTresor(t);
+        for (CarteTirage c : a.getCartesEnMain()) {
+            if (te.getNomCarte() == c.getNomCarte()) {
+                i++;
+            }
+        }
+        return i==4;
     }
 
     private CarteTirage getCarteChoisie(Aventurier jCourant) {
@@ -297,6 +312,48 @@ public class Controleur implements Observer {
 
     private Aventurier getJoueurChoisi() { // methode ihm 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
+    
+    
+    private void initialiserPiocheInondation() {
+//    CarteInondation c0 = new CarteInondation("Héliport") ;
+//    CarteInondation c1 = new CarteInondation("La Caverne des Ombres") ;
+//    CarteInondation c2 = new CarteInondation("La Forêt Pourpre");
+//    CarteInondation c3 = new CarteInondation("La Porte de Bronze");
+//    CarteInondation c4 = new CarteInondation("La Porte de Fer");
+//    CarteInondation c5 = new CarteInondation("La Tour de Guet");
+//    CarteInondation c6 = new CarteInondation("Le Jardin des MurMures");
+//    CarteInondation c7 = new CarteInondation("Le Marais Brumeux");
+//    CarteInondation c8 = new CarteInondation("Le Palais des Marées");
+//    CarteInondation c9 = new CarteInondation("Le Rocher Fantôme");
+//    CarteInondation c10 = new CarteInondation("Les Falaises de L'Oubli");
+//    CarteInondation c11 = new CarteInondation("Le Temple du Soleil");
+//    CarteInondation c12 = new CarteInondation("L'Observatoire");
+//    CarteInondation c13 = new CarteInondation("Le Val du Crépuscule");
+//    CarteInondation c14 = new CarteInondation("Le Temple de la Lune");
+//    CarteInondation c15 = new CarteInondation("Les Dunes de L'Illusion");
+//    CarteInondation c16 = new CarteInondation("Le Pont des Abîmes");
+//    CarteInondation c17 = new CarteInondation("Le Palais de Corail");
+//    CarteInondation c18 = new CarteInondation("Le Lagon Perdu");
+//    CarteInondation c19 = new CarteInondation("Le Jardin des Hurlements");
+//    CarteInondation c20 = new CarteInondation("La Porte D'Or");
+//    CarteInondation c21 = new CarteInondation("La Porte de Cuivre");
+//    CarteInondation c22 = new CarteInondation("La Porte D'argent");
+//    CarteInondation c23 = new CarteInondation("La Caverne du Brasier");
+    
+        this.piocheInondation = new ArrayList<>();
+        for (int i = 0; i < 24; i++) {
+            CarteInondation c = new CarteInondation(this.grille.getGrille().get(i));
+            this.piocheInondation.add(c);
+            System.out.println("Génération CarteInondation n°" + i + " - ID#" + this.piocheInondation.get(i).getId() + " - " + this.piocheInondation.get(i).getTuileAssociee().getNomTuile());
+        }
+    }
+
+    private void initialiserPiocheTresor() {
+        
     }
 
 }

@@ -61,10 +61,6 @@ public class Grille {
         
         Collections.shuffle(aPlacer);
         
-        for (Tuile t : aPlacer) {
-            System.out.println("ID #" + t.getId());
-        }
-        
         this.tuiles = new Tuile[6][6];
         //premier ligne
         tuiles[0][0] = null;

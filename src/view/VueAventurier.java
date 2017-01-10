@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.aventuriers.Aventurier;
 import util.Utils;
@@ -19,13 +21,28 @@ public class VueAventurier extends Observable {
 
     private Aventurier a;
     
-    private JPanel panelCentre = new JPanel(new GridLayout(5,2));
+    private JPanel mainPanel;
+    private JPanel panelCentre;
+    private JPanel panelDroite;
+    
+    private JFrame carte1 = new JFrame();
+    private JFrame carte2 = new JFrame();
+    private JFrame carte3 = new JFrame();
+    private JFrame carte4 = new JFrame();
+    private JFrame carte5 = new JFrame();
+    private JFrame carte6 = new JFrame();
+    private JFrame carte7 = new JFrame();
+    private JFrame carte8 = new JFrame();
+    private JFrame carte9 = new JFrame();
     
     private JButton btnTerminer;
     private JButton btnDonner;
+    private JButton btnRecupTresor;
     private JButton btnDeplacer;
     private JButton btnAssecher;
     private JButton btnJump;
+    private JButton btnHelico;
+    private JButton btnSacDeSable;
     
     private ImageIcon done;
     private ImageIcon give;
@@ -62,15 +79,16 @@ public class VueAventurier extends Observable {
             }
         });
         
-//        get = new ImageIcon(util.Parameters.ICON_GET);
-//        btn = new JButton(get);  on le fait pas car pas de bouton 
-//        btn.addActionListener(new ActionListener() {
-//                public void action preformed(ActionEvent e){
-//                 setChanged();
-//                 notifyObservers(Utils.Commandes.RECEVOIR);
-//                 clearChanged();
-//                }
-//        });
+        get = new ImageIcon(util.Parameters.ICON_GET);
+        btnRecupTresor = new JButton(get);
+        btnRecupTresor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                    setChanged();
+                    notifyObservers(Utils.Commandes.RECUPERER_TRESOR);
+                    clearChanged();
+            }
+        });
 
 
                 
@@ -85,7 +103,7 @@ public class VueAventurier extends Observable {
             }
         });
         
-        move_disabled = new ImageIcon(util.Parameters.ICON_MOVE_DISABLED);
+//        move_disabled = new ImageIcon(util.Parameters.ICON_MOVE_DISABLED);
 //        btnDeplacer = new JButton(move_disabled);
 //        btnDeplacer.addActionListener(new ActionListener() {
 //            @Override
@@ -119,26 +137,36 @@ public class VueAventurier extends Observable {
         });
         
         
+        panelCentre = new JPanel(new GridLayout(3,3));
+        panelDroite = new JPanel(new GridLayout(6,1));
+        mainPanel = new JPanel(new BorderLayout());
+
+        panelCentre.add(carte1);
+        panelCentre.add(carte2);
+        panelCentre.add(carte3);
+        panelCentre.add(carte4);
+        panelCentre.add(carte5);
+        panelCentre.add(carte6);
+        panelCentre.add(carte7);
+        panelCentre.add(carte8);
+        panelCentre.add(carte9);
+
+        panelDroite.add(btnDeplacer);
+        panelDroite.add(btnAssecher);
+        panelDroite.add(btnDonner);
+        panelDroite.add(btnRecupTresor);
+        panelDroite.add(btnHelico);
+        panelDroite.add(btnSacDeSable);
+        panelDroite.add(btnJump);
+        panelDroite.add(btnTerminer);
         
-        
-        /*
-        RESTE A FAIRE : 
-        GET 
-     //   GET_DIASABLED
-        GIVE
-        MOVE
-       // MOVE_DISABLED
-        DRY
-      //  DRY_DISABLED
-        SHIFT
-        */
-        
-        
-        
-        /*
-        MAQUETTE AVENTURIER GOGO
-        */
+        mainPanel.add(panelCentre, BorderLayout.CENTER);
+        mainPanel.add(panelDroite, BorderLayout.EAST);
+
     }
             
-            
+    
+    private void actualiserCartes() {
+        
+    }
 }

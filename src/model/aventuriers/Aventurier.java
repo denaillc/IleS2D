@@ -41,6 +41,10 @@ public abstract class Aventurier extends ObjetIdentifie {
         this.actionEffectuee();
     }
     
+    public void defausser(CarteTirage c) {
+        this.cartesEnMain.remove(c);
+    }
+    
     public void assecherTuile(Tuile t) {
         t.setEtatCourant(Utils.EtatTuile.ASSECHEE);
         this.actionEffectuee();
