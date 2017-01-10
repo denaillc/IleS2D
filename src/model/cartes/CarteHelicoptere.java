@@ -9,7 +9,7 @@ import model.cases.Tuile;
 public class CarteHelicoptere extends CarteTirage {
 
     public CarteHelicoptere() {
-        super("Hélicoptère", util.Parameters.CARTES+"Helicoptere.png");
+        super("Hélicoptère", util.Parameters.IMAGES + "Helicoptere.png");
     }
     
     

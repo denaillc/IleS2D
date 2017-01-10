@@ -5,14 +5,7 @@ import model.cartes.CarteTirage;
 
 public class CarteMonteeDesEaux extends CarteTirage {
 
-    public CarteMonteeDesEaux(String nomCarte) {
-        super(nomCarte, util.Parameters.CARTES+"MonteeDesEaux.png");
+    public CarteMonteeDesEaux() {
+        super("Montée des Eaux", util.Parameters.CARTES+"MonteeDesEaux.png");
     }
-
-    
-    CarteMonteeDesEaux cMonteEau = new CarteMonteeDesEaux("monté des eau 1") ;
-    CarteMonteeDesEaux cMonteEau2 = new CarteMonteeDesEaux("monté des eau 2") ;
-    
-            
-    
 }

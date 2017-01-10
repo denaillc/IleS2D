@@ -46,6 +46,8 @@ public class VueAventurier extends Observable {
     private ImageIcon dry;
     //private ImageIcon dry_disabled;
     private ImageIcon shift;
+    private ImageIcon helico;
+    private ImageIcon sable;
     
     public VueAventurier(Aventurier a) {
         this.a = a;
@@ -134,7 +136,8 @@ public class VueAventurier extends Observable {
             }
         });
         
-        btnHelico = new JButton("Hélicoptère");
+        helico = new ImageIcon(util.Parameters.TRESORS+"helicoptere.png");
+        btnHelico = new JButton(helico);
         btnJump.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,7 +147,8 @@ public class VueAventurier extends Observable {
             }
         });
         
-        btnSacDeSable = new JButton("Sac de Sable");
+        sable = new ImageIcon(util.Parameters.TRESORS+"sable.png");
+        btnSacDeSable = new JButton(sable);
         btnSacDeSable.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

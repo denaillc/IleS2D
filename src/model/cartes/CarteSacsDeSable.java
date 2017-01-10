@@ -8,7 +8,7 @@ import util.Utils;
 public class CarteSacsDeSable extends CarteTirage {
 
     public CarteSacsDeSable() {
-        super("Sacs de Sable", util.Parameters.CARTES+"SacsDeSable.png");
+        super("Sacs de Sable", util.Parameters.CARTES + "SacsDeSable.png");
     }
     
     

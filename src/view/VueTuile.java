@@ -23,6 +23,8 @@ public class VueTuile extends JPanel {
         labelNormal = new JLabel(imgNormal);
         labelInonde = new JLabel(imgInonde);
         this.afficherNormal();
+        
+//        this.addMouseListener(l);
     }
     
     public VueTuile() {

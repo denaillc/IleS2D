@@ -1,6 +1,7 @@
 package controler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
@@ -346,19 +347,6 @@ public class Controleur implements Observer {
      * @param jCourant
      * @return
      */
-    private ArrayList<Tuile> getTuilesDispoAssecher(Aventurier jCourant) {
-        return grille.getAdjacentsAssecher(jCourant);
-    }
-
-    /**
-     * retourne les case accesible pour se deplacer
-     *
-     * @param jCourant
-     * @return
-     */
-    private ArrayList<Tuile> getTuilesDispoBouger(Aventurier jCourant) {
-        return grille.getAdjacents(jCourant);
-    }
 
     private Aventurier getJoueurChoisi() { // methode ihm 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -369,40 +357,76 @@ public class Controleur implements Observer {
     
     
     private void initialiserPiocheInondation() {
+            
+    this.piocheInondation = new ArrayList<>();
+   
     piocheInondation.add(new CarteInondation("Héliport", IMAGES+"Heliport.png"));
-    CarteInondation c1 = new CarteInondation("La Caverne des Ombres",IMAGES+"LaCaverneDesOmbres.png") ;
-    CarteInondation c2 = new CarteInondation("La Forêt Pourpre",IMAGES+"LaFpretPourpre.png");
-    CarteInondation c3 = new CarteInondation("La Porte de Bronze",IMAGES+"LaForetDeBronze.png");
-    CarteInondation c4 = new CarteInondation("La Porte de Fer",IMAGES+"LaPorteDeFer.png");
-    CarteInondation c5 = new CarteInondation("La Tour de Guet",IMAGES+"LaTourDeGuet.png");
-    CarteInondation c6 = new CarteInondation("Le Jardin des MurMures",IMAGES+"LeJardinDesMurmures.png");
-    CarteInondation c7 = new CarteInondation("Le Marais Brumeux",IMAGES+"LeMaraisBrumeux.png");
-    CarteInondation c8 = new CarteInondation("Le Palais des Marées",IMAGES+"LePalaisDesMarees.png");
-    CarteInondation c9 = new CarteInondation("Le Rocher Fantôme",IMAGES+"LeRocherFantome.png");
-    CarteInondation c10 = new CarteInondation("Les Falaises de L'Oubli",IMAGES+"LesFalaisesDeLOubli.png");
-    CarteInondation c11 = new CarteInondation("Le Temple du Soleil",IMAGES+"LeTempleDuSoleil.png");
-    CarteInondation c12 = new CarteInondation("L'Observatoire",IMAGES+"Observatoire.png");
-    CarteInondation c13 = new CarteInondation("Le Val du Crépuscule",IMAGES+"LeValDuCrepuscule.png");
-    CarteInondation c14 = new CarteInondation("Le Temple de la Lune",IMAGES+"LeTempleDeLaLune.png");
-    CarteInondation c15 = new CarteInondation("Les Dunes de L'Illusion",IMAGES+"LesDunesDeLIllusion.png");
-    CarteInondation c16 = new CarteInondation("Le Pont des Abîmes",IMAGES+"LePontDesAbime.png");
-    CarteInondation c17 = new CarteInondation("Le Palais de Corail",IMAGES+"LePalaisDeCorail.png");
-    CarteInondation c18 = new CarteInondation("Le Lagon Perdu",IMAGES+"LeLagonPerdu.png");
-    CarteInondation c19 = new CarteInondation("Le Jardin des Hurlements",IMAGES+"LeJardinDesHurlements.png");
-    CarteInondation c20 = new CarteInondation("La Porte D'Or",IMAGES+"LaPorteDOr.png");
-    CarteInondation c21 = new CarteInondation("La Porte de Cuivre",IMAGES+"LaPorteDeCuivre.png");
-    CarteInondation c22 = new CarteInondation("La Porte D'argent",IMAGES+"LaPortedArgent.png");
-    CarteInondation c23 = new CarteInondation("La Caverne du Brasier",IMAGES+"CaverneDuBrasier.png");
-    
-    
-        this.piocheInondation = new ArrayList<>();
+    piocheInondation.add(new CarteInondation("La Caverne des Ombres",IMAGES+"LaCaverneDesOmbres.png"));
+    piocheInondation.add(new CarteInondation("La Forêt Pourpre",IMAGES+"LaFpretPourpre.png"));
+    piocheInondation.add(new CarteInondation("La Porte de Bronze",IMAGES+"LaForetDeBronze.png"));
+    piocheInondation.add(new CarteInondation("La Porte de Fer",IMAGES+"LaPorteDeFer.png"));
+    piocheInondation.add(new CarteInondation("La Tour de Guet",IMAGES+"LaTourDeGuet.png"));
+    piocheInondation.add(new CarteInondation("Le Jardin des MurMures",IMAGES+"LeJardinDesMurmures.png"));
+    piocheInondation.add(new CarteInondation("Le Marais Brumeux",IMAGES+"LeMaraisBrumeux.png"));
+    piocheInondation.add(new CarteInondation("Le Palais des Marées",IMAGES+"LePalaisDesMarees.png"));
+    piocheInondation.add(new CarteInondation("Le Rocher Fantôme",IMAGES+"LeRocherFantome.png"));
+    piocheInondation.add(new CarteInondation("Les Falaises de L'Oubli",IMAGES+"LesFalaisesDeLOubli.png"));
+    piocheInondation.add(new CarteInondation("Le Temple du Soleil",IMAGES+"LeTempleDuSoleil.png"));
+    piocheInondation.add(new CarteInondation("L'Observatoire",IMAGES+"Observatoire.png"));
+    piocheInondation.add(new CarteInondation("Le Val du Crépuscule",IMAGES+"LeValDuCrepuscule.png"));
+    piocheInondation.add(new CarteInondation("Le Temple de la Lune",IMAGES+"LeTempleDeLaLune.png"));
+    piocheInondation.add(new CarteInondation("Les Dunes de L'Illusion",IMAGES+"LesDunesDeLIllusion.png"));
+    piocheInondation.add(new CarteInondation("Le Pont des Abîmes",IMAGES+"LePontDesAbime.png"));
+    piocheInondation.add(new CarteInondation("Le Palais de Corail",IMAGES+"LePalaisDeCorail.png"));
+    piocheInondation.add(new CarteInondation("Le Lagon Perdu",IMAGES+"LeLagonPerdu.png"));
+    piocheInondation.add(new CarteInondation("Le Jardin des Hurlements",IMAGES+"LeJardinDesHurlements.png"));
+    piocheInondation.add(new CarteInondation("La Porte D'Or",IMAGES+"LaPorteDOr.png"));
+    piocheInondation.add(new CarteInondation("La Porte de Cuivre",IMAGES+"LaPorteDeCuivre.png"));
+    piocheInondation.add(new CarteInondation("La Porte D'argent",IMAGES+"LaPortedArgent.png"));
+    piocheInondation.add(new CarteInondation("La Caverne du Brasier",IMAGES+"CaverneDuBrasier.png"));
         for (int i = 0; i < 24; i++) {
             System.out.println("Génération CarteInondation n°" + i + " - ID#" + this.piocheInondation.get(i).getId() + " - " + this.piocheInondation.get(i).getNomCarte());
         }
+    Collections.shuffle(this.piocheInondation);
     }
 
     private void initialiserPiocheTresor() {
+    this.piocheTresor = new ArrayList<>();
+    
+        for (int i = 0; i < 5; i++) {
+            piocheTresor.add(new CarteTresor(Utils.Tresor.PIERRE));
+        }
+        this.piocheTresor.add(new CarteMonteeDesEaux());
+        this.piocheTresor.add(new CarteMonteeDesEaux());
+        //Créer 3 cartes hélico
+        //créer 2 cartes sacs de sable
         
+
+       CarteTresor pierre1 = new CarteTresor(Utils.Tresor.PIERRE) ; 
+    CarteTresor pierre2 = new CarteTresor(Utils.Tresor.PIERRE) ;
+    CarteTresor pierre3 = new CarteTresor(Utils.Tresor.PIERRE) ;
+    CarteTresor pierre4 = new CarteTresor(Utils.Tresor.PIERRE) ;
+    CarteTresor pierre5 = new CarteTresor(Utils.Tresor.PIERRE) ;    
+    
+    CarteTresor cristal1 = new CarteTresor(Utils.Tresor.CRISTAL) ;
+    CarteTresor cristal2 = new CarteTresor(Utils.Tresor.CRISTAL) ;
+    CarteTresor cristal3 = new CarteTresor(Utils.Tresor.CRISTAL) ;
+    CarteTresor cristal4 = new CarteTresor(Utils.Tresor.CRISTAL) ;
+    CarteTresor cristal5 = new CarteTresor(Utils.Tresor.CRISTAL) ;
+
+    CarteTresor zephyr1 = new CarteTresor(Utils.Tresor.ZEPHYR) ;
+    CarteTresor zephyr2 = new CarteTresor(Utils.Tresor.ZEPHYR) ;
+    CarteTresor zephyr3 = new CarteTresor(Utils.Tresor.ZEPHYR) ;
+    CarteTresor zephyr4 = new CarteTresor(Utils.Tresor.ZEPHYR) ;
+    CarteTresor zephyr5 = new CarteTresor(Utils.Tresor.ZEPHYR) ;
+    
+    CarteTresor calice1 = new CarteTresor(Utils.Tresor.CALICE) ;
+    CarteTresor calice2 = new CarteTresor(Utils.Tresor.CALICE) ;
+    CarteTresor calice3 = new CarteTresor(Utils.Tresor.CALICE) ;
+    CarteTresor calice4 = new CarteTresor(Utils.Tresor.CALICE) ;
+    CarteTresor calice5 = new CarteTresor(Utils.Tresor.CALICE) ;     
+
+    Collections.shuffle(piocheTresor);
     }
 
     private ArrayList<Tuile> getTuilesDispoHelico() {
@@ -436,6 +460,22 @@ public class Controleur implements Observer {
 
     private void useSacDeSable(Tuile tuile) {
         tuile.setEtatCourant(Utils.EtatTuile.ASSECHEE);
+    }
+    
+    
+    
+        private ArrayList<Tuile> getTuilesDispoAssecher(Aventurier jCourant) {
+        return grille.getAdjacentsAssecher(jCourant);
+    }
+
+    /**
+     * retourne les case accesible pour se deplacer
+     *
+     * @param jCourant
+     * @return
+     */
+    private ArrayList<Tuile> getTuilesDispoBouger(Aventurier jCourant) {
+        return grille.getAdjacents(jCourant);
     }
 
 }
