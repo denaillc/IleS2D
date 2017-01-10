@@ -22,16 +22,22 @@ public class Tuile extends ObjetIdentifie {
     public Tuile(String nomTuile, String cheminImage, String cheminImageInonde) {
         this.nomTuile = nomTuile;
         this.cheminImage = cheminImage;
+        this.cheminImageInonde = cheminImageInonde;
         this.etatCourant = EtatTuile.ASSECHEE;
         aventuriersDessus = new ArrayList<>();
         this.tresor = null;
+        System.out.println(this.getId() + " - " + this.getNomTuile() + " - " + this.etatCourant + " - " + this.cheminImage + " - " + this.cheminImageInonde);
     }
     
     public Tuile(String nomTuile, String cheminImage, String cheminImageInonde, Utils.Tresor tresor) {
         this.nomTuile = nomTuile;
         this.cheminImage = cheminImage;
+        this.cheminImageInonde = cheminImageInonde;
+        this.etatCourant = EtatTuile.ASSECHEE;
         this.tresor = tresor;
+        System.out.println(this.getId() + " - " + this.getNomTuile() + " - " + this.tresor + " - " + this.etatCourant + " - " + this.cheminImage + " - " + this.cheminImageInonde);
     }
+
     
     
     

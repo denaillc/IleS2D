@@ -1,6 +1,7 @@
 package model.cases;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import javafx.util.Pair;
 import model.aventuriers.Aventurier;
 import model.aventuriers.Explorateur;
@@ -32,7 +33,7 @@ public class Grille {
      * Constructeur
      */
     public Grille() {
-
+        aPlacer = new ArrayList<>();
         aPlacer.add(new Tuile("Héliport", TUILES+"Heliport.png", TUILES+"Heliport_Inonde.png"));
         aPlacer.add(new Tuile("La Caverne des Ombres", TUILES+"LaCaverneDesOmbres.png", TUILES+"LaCaverneDesOmbres_Inonde.png", Utils.Tresor.CRISTAL));
         aPlacer.add(new Tuile("La Forêt Pourpre", TUILES+"LaForetPourpre.png", TUILES+"LaForetPourpre_Inonde.png"));
@@ -58,7 +59,11 @@ public class Grille {
         aPlacer.add(new Tuile("La Porte D'argent", TUILES+"LaPortedArgent.png", TUILES+"LaPortedArgent_Inonde.png"));
         aPlacer.add(new Tuile("La Caverne du Brasier", TUILES+"LaCaverneDuBrasier.png", TUILES+"LaCaverneDuBrasier_Inonde.png", Utils.Tresor.CRISTAL));
         
-        Utils.melangerTuile(aPlacer);
+        Collections.shuffle(aPlacer);
+        
+        for (Tuile t : aPlacer) {
+            System.out.println("ID #" + t.getId());
+        }
         
         this.tuiles = new Tuile[6][6];
         //premier ligne

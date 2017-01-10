@@ -35,7 +35,7 @@ public class VueInscription extends Observable {
         window = new JFrame();
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         window.setSize(250,250);
-        window.setLocation(650,0);
+        window.setLocation(1050,0);
         window.setTitle("Inscription");
         
         window.add(mainPanel);
@@ -74,7 +74,6 @@ public class VueInscription extends Observable {
         pseudo2.setText("Paul");
         
         this.show();
-        
 //        Utils.poserQuestion("Slip ou caleçon ?");
         
     }
@@ -84,11 +83,15 @@ public class VueInscription extends Observable {
     public void terminerInscription() {
         window.invalidate();
         this.getMainPanel().removeAll();
-        JPanel panelCentre2 = new JPanel(new GridLayout(3,2));
-        panelCentre2.add(new JButton(this.pseudo1.getText()));
-        panelCentre2.add(new JButton(this.pseudo2.getText()));
-        panelCentre2.add(new JButton(this.pseudo3.getText()));
-        panelCentre2.add(new JButton(this.pseudo4.getText()));
+        JPanel panelCentre2 = new JPanel(new GridLayout(5,2));
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
+        panelCentre2.add(new JLabel());
         panelCentre2.add(btnValider);
         panelCentre2.add(btnQuitter);
         mainPanel.add(panelCentre2, BorderLayout.CENTER);

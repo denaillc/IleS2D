@@ -46,8 +46,8 @@ public abstract class Aventurier extends ObjetIdentifie {
         this.actionEffectuee();
     }
     
-    public void gagnerTresor(Utils.Tresor t) {
-        this.tresorsPossedes.add(t);
+    public void gagnerTresor() {
+        this.tresorsPossedes.add(this.getPosition().getTresor());
         this.actionEffectuee();
     }
     

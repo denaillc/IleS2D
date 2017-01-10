@@ -21,12 +21,19 @@ public class Controleur implements Observer {
     private ArrayList<CarteTirage> piocheTirage;
     private ArrayList<CarteTirage> defausseTirage;
     private Grille grille;
-    private VueInscription VueI;
     private Aventurier jCourant;
+    
+    private VueInscription VueI;
+    private VuePlateau VueP;
 
     public Controleur() {
         VueI = new VueInscription();
         VueI.addObserver(this);
+        
+        grille = new Grille();
+        
+        VueP = new VuePlateau(grille);
+        VueP.addObserver(this);
     }
 
     @Override
@@ -37,6 +44,7 @@ public class Controleur implements Observer {
                 System.out.println("Pas assez de joueurs");
             } else {
                 VueI.terminerInscription();
+//                VueP.show();
             }
 
             //Debut création voir TODO
@@ -49,6 +57,14 @@ public class Controleur implements Observer {
         } else if (arg == Utils.Commandes.RECUPERER_TRESOR) {
 
         } else if (arg == Utils.Commandes.TERMINER) {
+            jCourant.resetPtsAction();
+            int num = this.joueurs.indexOf(jCourant);                                       // On récupère le numéro du joueur dans l'ordre du tour
+            if (num == this.joueurs.size()) {                                               // Si c'était le dernier joueur
+                jCourant = this.joueurs.get(0);                                             // On refait le tour
+            }
+            else {
+                jCourant = this.joueurs.get(num++);                                           // Sinon on passe au joueur suivant
+            }
 
         } else if (arg == Utils.Commandes.RECEVOIR) {
 
@@ -89,14 +105,16 @@ public class Controleur implements Observer {
      * @return 
      */
     public CarteTirage choisirCarte(){
+        CarteTirage c = null;
         for (int i = 0; i <= jCourant.getCartesEnMain().size(); i++) {
 
                 if (jCourant.getCartesEnMain().get(i).getId() == getCarteChoisie(jCourant).getId()) { 
                 //getCarteChoisit = > méthode IHM qui demande au joueur quel carte il choisit à Défausser/Echanger
-                   return jCourant.getCartesEnMain().get(i);
+                   c = jCourant.getCartesEnMain().get(i);
                    //possibilité de mettre un booléen pour optimiser les itérations
                 }
             }
+        return c;
     }
 
     public void deroulementTour() {
@@ -118,20 +136,19 @@ public class Controleur implements Observer {
         
        // ACTIONS 
         
-       
+       Utils.Commandes action = Utils.Commandes.QUITTER;
 //BOUGER
         if (jCourant.getPtsAction() > 0) {        
         }
-            if (action == Utils.Commandes.BOUGER) { //action est un message retourné par une vue 
-                tuilesDispo[] = getTuilesDispoBouger(jCourant);
+            if (action == Utils.Commandes.BOUGER) { //action est un message retourné par une vue
                 if (getTuilesDispoBouger(jCourant).size() > 0) {
                     //demander quelle tuile il veut aller (IHM)
-                    tuile = getTuileChoisie();
+                    Tuile tuile = getTuileChoisie();
                     //lui afficher les case et lui faire chosir une case (IHM)
                     for (int i = 0; i < getTuilesDispoBouger(jCourant).size(); i++) {
                         //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                        if (getTuilesDispoBouger(jCourant).get(i).get(Id) == getTuileChoisie().getId()) {
-                            jCourant.seDeplacer(getTuilesDispoBouger(jCourant)[i]);
+                        if (getTuilesDispoBouger(jCourant).get(i).getId() == tuile.getId()) {
+                            jCourant.seDeplacer(getTuilesDispoBouger(jCourant).get(i));
                             jCourant.actionEffectuee();
                         }
 
@@ -145,15 +162,14 @@ public class Controleur implements Observer {
             
  //ASSECHER           
             if (action == Utils.Commandes.ASSECHER) {
-                        tuilesDispo[] = getTuilesDispoAssecher(jCourant);
                 if (getTuilesDispoAssecher(jCourant).size() > 0) {
                     //demander quelle tuile il veut assecher (IHM)
-                    tuile = getTuileChoisie();//méthode IHM
+                    Tuile tuile = getTuileChoisie();//méthode IHM
                     //lui afficher les case et lui faire chosir une case (IHM)
                     for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
                         //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                        if (getTuilesDispoAssecher(jCourant).get(i).get(Id) == getTuileChoisie().getId()) {
-                            jCourant.assecherTuile(getTuilesDispoAssecher(jCourant)[i]);
+                        if (getTuilesDispoAssecher(jCourant).get(i).getId() == tuile.getId()) {
+                            jCourant.assecherTuile(getTuilesDispoAssecher(jCourant).get(i));
                             jCourant.actionEffectuee();
                         }
                     }
@@ -168,32 +184,31 @@ public class Controleur implements Observer {
                     if (getTuilesDispoAssecher(jCourant).size() > 0) {
                         //On lui demande si il veut assecher une deuxième tuile
                         // if oui
-                        tuilesDispo[] = getTuilesDispoAssecher(jCourant);
                         //demander quelle tuile il veut assecher (IHM)
-                        tuile = getTuileChoisie();//méthode IHM
+                        Tuile tuile = getTuileChoisie();//méthode IHM
                         //lui afficher les case et lui faire chosir une case (IHM)
                         for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
                             //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                            if (getTuilesDispoAssecher(jCourant).get(i).get(Id) == getTuileChoisie().getId()) {
-                                jCourant.assecherTuile(getTuilesDispoAssecher(jCourant)[i]);
+                            if (getTuilesDispoAssecher(jCourant).get(i).getId() == getTuileChoisie().getId()) {
+                                jCourant.assecherTuile(getTuilesDispoAssecher(jCourant).get(i));
                             }
                         }
                     }
                 }
-            }
             
 //DONNER            
             if (action == Utils.Commandes.DONNER) {
-                joueursDispo[] = getJoueursDispo(jCourant);
-                if (getJoueursDispo().size() > 0) {
+                ArrayList<Aventurier> joueursDispo = jCourant.getPosition().getAventuriersDessus();
+                joueursDispo.remove(jCourant);
+                if (joueursDispo.size() > 0) {
                     if (jCourant.getCartesEnMain().size() > 0){ //VERIFIER LES CARTES ACTIONS SPECIALES
                         //demander quelle joueur il veut echanger (IHM)
-                        joueur = getJoueurChoisit();//méthode IHM
+                        Aventurier receveur = getJoueurChoisi();//méthode IHM
                         //lui afficher les joueur et lui faire chosir un joueur (IHM)
-                        for (int i = 0; i < getJoueursDispo(jCourant).size(); i++) {
+                        for (int i = 0; i < joueursDispo.size(); i++) {
                             //on parcourt la liste des joueurs dispo pour comparer avec celle que le joueur a choisit
-                            if (getJoueursDispo(jCourant).get(i).get(Id) == getJoueurChoisit().getId()) {
-                                jCourant.donnerCarte(getJoueursDispo(jCourant).get(i),choisirCarte());
+                            if (joueursDispo.get(i).getId() == getJoueurChoisi().getId()) {
+                                jCourant.donnerCarte(joueursDispo.get(i),choisirCarte());
                                 jCourant.actionEffectuee();
                             }
                         }
@@ -221,7 +236,7 @@ public class Controleur implements Observer {
                   if (tresorRecup){
                         //Demander si le joueur veut récupérer le trésor
                                 //SI OUI
-                                 jCourant.gagnerTresor(jCourant.getPosition().getTresor());
+                                 jCourant.gagnerTresor();
                                  jCourant.actionEffectuee();
                         }
                         else {
@@ -229,12 +244,13 @@ public class Controleur implements Observer {
                         }   
                 }                                               
             }
+    }
 
-    private Object getCarteChoisie(Aventurier jCourant) {
+    private CarteTirage getCarteChoisie(Aventurier jCourant) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private Object getTuileChoisie() {
+    private Tuile getTuileChoisie() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 /**
@@ -252,6 +268,10 @@ public class Controleur implements Observer {
  */
     private ArrayList<Tuile> getTuilesDispoBouger(Aventurier jCourant) {
     return grille.getAdjacents(jCourant) ;    }
+
+    private Aventurier getJoueurChoisi() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
 
