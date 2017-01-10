@@ -59,7 +59,7 @@ public class VueAventurier extends Observable {
         window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         window.setSize(500,400);
         window.setLocation(1000,500);
-        window.setTitle(a.getPseudo());
+        window.setTitle("Au tour de " + a.getPseudo());
         
         done = new ImageIcon(util.Parameters.ICON_DONE);
         btnTerminer = new JButton(done);
