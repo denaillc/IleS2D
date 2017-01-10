@@ -25,15 +25,15 @@ public class VueAventurier extends Observable {
     private JPanel panelCentre;
     private JPanel panelDroite;
     
-    private JFrame carte1 = new JFrame();
-    private JFrame carte2 = new JFrame();
-    private JFrame carte3 = new JFrame();
-    private JFrame carte4 = new JFrame();
-    private JFrame carte5 = new JFrame();
-    private JFrame carte6 = new JFrame();
-    private JFrame carte7 = new JFrame();
-    private JFrame carte8 = new JFrame();
-    private JFrame carte9 = new JFrame();
+    private JLabel carte1;
+    private JLabel carte2;
+    private JLabel carte3;
+    private JLabel carte4;
+    private JLabel carte5;
+    private JLabel carte6;
+    private JLabel carte7;
+    private JLabel carte8;
+    private JLabel carte9;
     
     private JButton btnTerminer;
     private JButton btnDonner;
@@ -56,6 +56,10 @@ public class VueAventurier extends Observable {
     public VueAventurier(Aventurier a) {
         this.a = a;
         window = new JFrame();
+        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.setSize(500,400);
+        window.setLocation(1000,500);
+        window.setTitle(a.getPseudo());
         
         done = new ImageIcon(util.Parameters.ICON_DONE);
         btnTerminer = new JButton(done);
@@ -126,7 +130,7 @@ public class VueAventurier extends Observable {
         });
 
         shift = new ImageIcon(util.Parameters.ICON_SHIFT);
-        btnJump = new JButton(dry) ;
+        btnJump = new JButton(shift) ;
         btnJump.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,24 +140,45 @@ public class VueAventurier extends Observable {
             }
         });
         
+        btnHelico = new JButton("Hélicoptère");
+        btnJump.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setChanged();
+                notifyObservers(Utils.Commandes.JOUER_HELICO);
+                clearChanged();
+            }
+        });
+        
+        btnSacDeSable = new JButton("Sac de Sable");
+        btnSacDeSable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setChanged();
+                notifyObservers(Utils.Commandes.JOUER_SDS);
+                clearChanged();
+            }
+        });
+        
+        
         
         panelCentre = new JPanel(new GridLayout(3,3));
-        panelDroite = new JPanel(new GridLayout(6,1));
+        panelDroite = new JPanel(new GridLayout(4,2));
         mainPanel = new JPanel(new BorderLayout());
 
-        panelCentre.add(carte1);
-        panelCentre.add(carte2);
-        panelCentre.add(carte3);
-        panelCentre.add(carte4);
-        panelCentre.add(carte5);
-        panelCentre.add(carte6);
-        panelCentre.add(carte7);
-        panelCentre.add(carte8);
-        panelCentre.add(carte9);
+        panelCentre.add(carte1 = new JLabel("carte n°1"));
+        panelCentre.add(carte2 = new JLabel("carte n°2"));
+        panelCentre.add(carte3 = new JLabel("carte n°3"));
+        panelCentre.add(carte4 = new JLabel("carte n°4"));
+        panelCentre.add(carte5 = new JLabel("carte n°5"));
+        panelCentre.add(carte6 = new JLabel("carte n°6"));
+        panelCentre.add(carte7 = new JLabel("carte n°7"));
+        panelCentre.add(carte8 = new JLabel("carte n°8"));
+        panelCentre.add(carte9 = new JLabel("carte n°9"));
 
         panelDroite.add(btnDeplacer);
-        panelDroite.add(btnAssecher);
         panelDroite.add(btnDonner);
+        panelDroite.add(btnAssecher);
         panelDroite.add(btnRecupTresor);
         panelDroite.add(btnHelico);
         panelDroite.add(btnSacDeSable);
@@ -162,11 +187,22 @@ public class VueAventurier extends Observable {
         
         mainPanel.add(panelCentre, BorderLayout.CENTER);
         mainPanel.add(panelDroite, BorderLayout.EAST);
-
+        
+        window.add(mainPanel);
+        this.show();
     }
             
     
     private void actualiserCartes() {
         
+    }
+    
+    
+    public void show() {
+        this.window.setVisible(true);
+    }
+    
+    public void hide() {
+        this.window.setVisible(false);
     }
 }

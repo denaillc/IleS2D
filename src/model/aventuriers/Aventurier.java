@@ -9,15 +9,17 @@ import model.cases.Tuile;
 import util.Utils;
 
 public abstract class Aventurier extends ObjetIdentifie {
-    
+        
+        String pseudo;
         Utils.Pion pion;
 	Tuile position;
 	ArrayList<CarteTirage> cartesEnMain;
         ArrayList<Utils.Tresor> tresorsPossedes;
         int ptsAction;
 
-    public Aventurier(Utils.Pion pion, Tuile position) {
-        
+    public Aventurier(String pseudo, Utils.Pion pion, Tuile position) {
+        super();
+        this.pseudo = pseudo;
         this.pion = pion;
         this.position = position;
         cartesEnMain = new ArrayList<>();
@@ -72,11 +74,28 @@ public abstract class Aventurier extends ObjetIdentifie {
     public void actionEffectuee() {
         this.ptsAction--;
     }
+
+    
+    
+    
     
     
 //    **********************************************
 //    ************ GETTERS ET SETTERS **************
 //    **********************************************
+    
+    
+    
+    
+    
+    
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
     public Utils.Pion getPion() {
         return pion;

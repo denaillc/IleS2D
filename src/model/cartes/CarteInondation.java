@@ -5,21 +5,32 @@ import model.cases.Tuile;
 
 public class CarteInondation extends ObjetIdentifie {
 
-private Tuile tuileAssociee;
+private String nomCarte;
+private String cheminImage;
 
-    public CarteInondation(Tuile t) {
+    public CarteInondation(String nomCarte, String cheminImage) {
         super();
-        this.tuileAssociee = t;
+        this.nomCarte = nomCarte;
+        this.cheminImage = cheminImage;
         
     }
 
-    public Tuile getTuileAssociee() {
-        return tuileAssociee;
+    public String getNomCarte() {
+        return nomCarte;
     }
 
-    public void setTuileAssociee(Tuile tuileAssociee) {
-        this.tuileAssociee = tuileAssociee;
+    public void setNomCarte(String nomCarte) {
+        this.nomCarte = nomCarte;
     }
+
+    public String getCheminImage() {
+        return cheminImage;
+    }
+
+    public void setCheminImage(String cheminImage) {
+        this.cheminImage = cheminImage;
+    }
+
 
    
 

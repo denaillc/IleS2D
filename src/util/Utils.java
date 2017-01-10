@@ -28,6 +28,8 @@ public class Utils {
         VOIR_DEFAUSSE("Un joueur souhaite voir la défausse de cartes Tirage"),
         PIOCHER_INONDATION("Un joueur pioche une carte Inondation"),
         PIOCHER_TRESOR("Un joueur pioche une carte Trésor"),
+        JOUER_HELICO("Utilisation d'une carte Hélicoptère"),
+        JOUER_SDS("Utilisation d'une carte Sac de Sable"),
         QUITTER("Quitter le jeu");
 
         private final String libelle ;

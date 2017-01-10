@@ -7,7 +7,7 @@ import util.Utils;
 
 public class Pilote extends Aventurier {
 
-    public Pilote(Utils.Pion pion, Tuile position) {
-        super(pion, position);
+    public Pilote(String pseudo, Utils.Pion pion, Tuile position) {
+        super(pseudo, pion, position);
     }
 }

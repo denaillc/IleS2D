@@ -9,6 +9,7 @@ import model.aventuriers.*;
 import model.cartes.*;
 import model.cases.*;
 import model.cases.Grille;
+import static util.Parameters.IMAGES;
 import util.Utils;
 import view.*;
 
@@ -22,10 +23,18 @@ public class Controleur implements Observer {
     private ArrayList<CarteTirage> defausseTresor;
     private Grille grille;
     private Aventurier jCourant;
+    private Aventurier J1;
+    private Aventurier J2;
+    private Aventurier J3;
+    private Aventurier J4;
 
     private VueInscription VueI;
     private VuePlateau VueP;
     private VueNiveau VueN;
+    private VueAventurier VueJoueur1;
+    private VueAventurier VueJoueur2;
+    private VueAventurier VueJoueur3;
+    private VueAventurier VueJoueur4;
 
     public Controleur() {
         
@@ -43,8 +52,6 @@ public class Controleur implements Observer {
         VueP = new VuePlateau(grille);
         VueP.addObserver(this);
         
-        
-        
 //        VueN = new VueNiveau(4);
     }
 
@@ -57,6 +64,10 @@ public class Controleur implements Observer {
             } else {
                 VueI.terminerInscription();
 //                VueP.show();
+
+                J1 = new Explorateur(VueI.getPseudo1().getText(), Utils.Pion.VERT, grille.getTuiles()[3][3]);
+                VueJoueur1 = new VueAventurier(J1);
+                VueJoueur1.addObserver(this);
             }
 
             //Debut création voir TODO
@@ -319,7 +330,7 @@ public class Controleur implements Observer {
     
     
     private void initialiserPiocheInondation() {
-//    CarteInondation c0 = new CarteInondation("Héliport") ;
+    piocheInondation.add(new CarteInondation("Héliport", IMAGES+"Heliport.png"));
 //    CarteInondation c1 = new CarteInondation("La Caverne des Ombres") ;
 //    CarteInondation c2 = new CarteInondation("La Forêt Pourpre");
 //    CarteInondation c3 = new CarteInondation("La Porte de Bronze");
@@ -344,11 +355,10 @@ public class Controleur implements Observer {
 //    CarteInondation c22 = new CarteInondation("La Porte D'argent");
 //    CarteInondation c23 = new CarteInondation("La Caverne du Brasier");
     
+    
         this.piocheInondation = new ArrayList<>();
         for (int i = 0; i < 24; i++) {
-            CarteInondation c = new CarteInondation(this.grille.getGrille().get(i));
-            this.piocheInondation.add(c);
-            System.out.println("Génération CarteInondation n°" + i + " - ID#" + this.piocheInondation.get(i).getId() + " - " + this.piocheInondation.get(i).getTuileAssociee().getNomTuile());
+            System.out.println("Génération CarteInondation n°" + i + " - ID#" + this.piocheInondation.get(i).getId() + " - " + this.piocheInondation.get(i).getNomCarte());
         }
     }
 
