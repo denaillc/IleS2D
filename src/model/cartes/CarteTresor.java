@@ -45,5 +45,15 @@ public class CarteTresor extends CarteTirage {
     CarteTresor calice3 = new CarteTresor("CALICE") ;
     CarteTresor calice4 = new CarteTresor("CALICE") ;
     CarteTresor calice5 = new CarteTresor("CALICE") ;    
+
+    public String getNomCarte() {
+        return nomCarte;
+    }
+
+    public void setNomCarte(String nomCarte) {
+        this.nomCarte = nomCarte;
+    }
+    
+    
     
 }
