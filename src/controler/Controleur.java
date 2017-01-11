@@ -57,11 +57,10 @@ public class Controleur implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("ARG=" + arg.toString());
         if (arg == Utils.Commandes.VALIDER_JOUEURS) {
             if (VueI.getPseudo1().getText().equals("")
                     || VueI.getPseudo2().getText().equals("")) {
-                System.out.println("Pas assez de joueurs");
+                VueI.write("Pas assez de joueurs");
             } else {
                 VueI.terminerInscription();
 //                VueP.show();
@@ -109,14 +108,14 @@ public class Controleur implements Observer {
             }
 
         } else if (arg == Utils.Commandes.BOUGER) {
-            System.out.println("Vous êtes actuellement sur la tuile : " + jCourant.getPosition().getNomTuile());
+            VueI.write("Vous êtes actuellement sur la tuile : " + jCourant.getPosition().getNomTuile());
             if (jCourant.getPtsAction() > 0) {
 
                 if (getTuilesDispoBouger(jCourant).size() > 0) {
                     action = Utils.Commandes.BOUGER;
                     
                 } else {
-                    System.out.println("Le joueur ne peut pas se déplacer");
+                    VueI.write("Le joueur ne peut pas se déplacer");
                 }
             }
         } else if (arg == Utils.Commandes.ASSECHER) {
@@ -181,13 +180,13 @@ public class Controleur implements Observer {
                     }
                 }
             } else if (action == Utils.Commandes.JOUER_HELICO || action == Utils.Commandes.JOUER_SDS) {
-                System.out.println("jouerCarteActionSpeciale");
+                VueI.write("jouerCarteActionSpeciale");
                 this.jouerCarteActionSpeciale((CarteTirage) arg);
             }
             
         } else if (arg instanceof VueTuile) {
             Tuile tuile = ((VueTuile) arg).getT();
-            System.out.println("Tuile choisie : "  + tuile.getNomTuile());
+            VueI.write("Tuile choisie : "  + tuile.getNomTuile());
             if (action == Utils.Commandes.BOUGER) {
                     //lui afficher les case et lui faire chosir une case (IHM)
                     for (int i = 0; i < getTuilesDispoBouger(jCourant).size(); i++) {
@@ -195,7 +194,7 @@ public class Controleur implements Observer {
                         if (getTuilesDispoBouger(jCourant).get(i).getId() == tuile.getId()) {
                             jCourant.seDeplacer(getTuilesDispoBouger(jCourant).get(i));
                             jCourant.actionEffectuee();
-                            System.out.println("Déplacement effectué");
+                            VueI.write("Déplacement effectué");
                         }
                     }
             }
@@ -236,10 +235,10 @@ public class Controleur implements Observer {
 
         } else if (arg == Utils.Commandes.JOUER_HELICO) {
             action = Utils.Commandes.JOUER_HELICO;
-            System.out.println("sélectionner la carte hélico à jouer");
+            VueI.write("sélectionner la carte hélico à jouer");
         } else if (arg == Utils.Commandes.JOUER_SDS) {
             action = Utils.Commandes.JOUER_SDS;
-            System.out.println("sélectionner la carte sac de sable à jouer");
+            VueI.write("sélectionner la carte sac de sable à jouer");
         }
 
 //        public void ValidationJoueurs() {

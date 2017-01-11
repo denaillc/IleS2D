@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import util.Parameters;
 import util.Utils;
@@ -30,6 +32,8 @@ public class VueInscription extends Observable {
     private JTextField pseudo2 = new JTextField("");
     private JTextField pseudo3 = new JTextField("");
     private JTextField pseudo4 = new JTextField("");
+    private JTextArea text;
+    private JScrollPane sp;
 
     public VueInscription() {
         window = new JFrame();
@@ -82,21 +86,27 @@ public class VueInscription extends Observable {
     
     public void terminerInscription() {
         window.invalidate();
-        this.getMainPanel().removeAll();
-        JPanel panelCentre2 = new JPanel(new GridLayout(5,2));
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(new JLabel());
-        panelCentre2.add(btnValider);
-        panelCentre2.add(btnQuitter);
-        mainPanel.add(panelCentre2, BorderLayout.CENTER);
-        window.validate();
-        this.hide();
+//        this.getMainPanel().removeAll();
+//        JPanel panelCentre2 = new JPanel(new GridLayout(5,2));
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(new JLabel());
+//        panelCentre2.add(btnValider);
+//        panelCentre2.add(btnQuitter);
+//        mainPanel.add(panelCentre2, BorderLayout.CENTER);
+        
+        
+        window.setTitle("Console");
+        text = new JTextArea();
+        sp = new JScrollPane(text);
+        window.remove(mainPanel);
+        window.add(sp);
+        window.validate();       
     }  
     
     
@@ -106,6 +116,9 @@ public class VueInscription extends Observable {
 //    ************ GETTERS ET SETTERS **************
 //    **********************************************
     
+    public void write(String msg) {
+        this.text.append(msg + "\n");
+    }
     
     public void show() {
         this.window.setVisible(true);
