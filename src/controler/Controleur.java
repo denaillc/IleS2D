@@ -28,6 +28,7 @@ public class Controleur implements Observer {
     private Aventurier J2;
     private Aventurier J3;
     private Aventurier J4;
+    private Utils.Commandes action;
 
     private VueInscription VueI;
     private VuePlateau VueP;
@@ -38,6 +39,8 @@ public class Controleur implements Observer {
     private VueAventurier VueJoueur4;
 
     public Controleur() {
+
+        this.joueurs = new ArrayList<>();
 
         VueI = new VueInscription();
         VueI.addObserver(this);
@@ -54,6 +57,7 @@ public class Controleur implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("ARG=" + arg.toString());
         if (arg == Utils.Commandes.VALIDER_JOUEURS) {
             if (VueI.getPseudo1().getText().equals("")
                     || VueI.getPseudo2().getText().equals("")) {
@@ -63,62 +67,179 @@ public class Controleur implements Observer {
 //                VueP.show();
 
                 J1 = new Explorateur(VueI.getPseudo1().getText(), Utils.Pion.VERT, grille.getTuiles()[3][3]);
+                J2 = new Ingénieur(VueI.getPseudo2().getText(), Utils.Pion.ROUGE, grille.getTuiles()[3][3]);
+                J1.getCartesEnMain().add(new CarteTresor(Utils.Tresor.CRISTAL));
+                J1.getCartesEnMain().add(new CarteTresor(Utils.Tresor.ZEPHYR));
+                J1.getCartesEnMain().add(new CarteTresor(Utils.Tresor.CALICE));
+                J1.getCartesEnMain().add(new CarteTresor(Utils.Tresor.PIERRE));
+                J1.getCartesEnMain().add(new CarteSacsDeSable());
                 J1.getCartesEnMain().add(new CarteHelicoptere());
                 J1.getCartesEnMain().add(new CarteHelicoptere());
                 J1.getCartesEnMain().add(new CarteHelicoptere());
                 J1.getCartesEnMain().add(new CarteHelicoptere());
-                J1.getCartesEnMain().add(new CarteHelicoptere());
-                J1.getCartesEnMain().add(new CarteHelicoptere());
-                J1.getCartesEnMain().add(new CarteHelicoptere());
-                J1.getCartesEnMain().add(new CarteHelicoptere());
-                J1.getCartesEnMain().add(new CarteHelicoptere());
+
+                this.joueurs.add(J1);
                 VueJoueur1 = new VueAventurier(J1);
                 VueJoueur1.addObserver(this);
+
+                this.joueurs.add(J2);
+                VueJoueur2 = new VueAventurier(J2);
+                VueJoueur2.addObserver(this);
+
+                if (!VueI.getPseudo3().getText().equals("")) {
+                    J3 = new Messager(VueI.getPseudo3().getText(), Utils.Pion.JAUNE, grille.getTuiles()[3][4]);
+                    this.joueurs.add(J3);
+                    VueJoueur3 = new VueAventurier(J3);
+                    VueJoueur3.addObserver(this);
+                } else {
+                    VueJoueur3 = null;
+                }
+
+                if (!VueI.getPseudo4().getText().equals("")) {
+                    J4 = new Pilote(VueI.getPseudo4().getText(), Utils.Pion.VIOLET, grille.getTuiles()[3][4]);
+                    this.joueurs.add(J4);
+                    VueJoueur4 = new VueAventurier(J4);
+                    VueJoueur4.addObserver(this);
+                } else {
+                    VueJoueur4 = null;
+                }
+
+                jCourant = this.joueurs.get(0);
+                this.vueCourante().show();
             }
 
-            //Debut création voir TODO
         } else if (arg == Utils.Commandes.BOUGER) {
+            System.out.println("Vous êtes actuellement sur la tuile : " + jCourant.getPosition().getNomTuile());
+            if (jCourant.getPtsAction() > 0) {
 
+                if (getTuilesDispoBouger(jCourant).size() > 0) {
+                    action = Utils.Commandes.BOUGER;
+                    
+                } else {
+                    System.out.println("Le joueur ne peut pas se déplacer");
+                }
+            }
         } else if (arg == Utils.Commandes.ASSECHER) {
+            if (jCourant.getPtsAction() > 0) {
+                if (getTuilesDispoAssecher(jCourant).size() > 0) {
+                    //demander quelle tuile il veut assecher (IHM)
+                    Tuile tuile = getTuileChoisie();//méthode IHM
+                    //lui afficher les case et lui faire chosir une case (IHM)
+                    for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
+                        //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
+                        if (getTuilesDispoAssecher(jCourant).get(i).getId() == tuile.getId()) {
+                            jCourant.assecherTuile(getTuilesDispoAssecher(jCourant).get(i));
+                            jCourant.actionEffectuee();
+                        }
+                    }
+                } else {
+                    //Le joueur ne peut pas assécher de tuiles
+                }
+
+                if (jCourant instanceof Ingénieur) {
+                    if (getTuilesDispoAssecher(jCourant).size() > 0) {
+                        //On lui demande si il veut assecher une deuxième tuile
+                        // if oui
+                        //demander quelle tuile il veut assecher (IHM)
+                        Tuile tuile = getTuileChoisie();//méthode IHM
+                        //lui afficher les case et lui faire chosir une case (IHM)
+                        for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
+                            //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
+                            if (getTuilesDispoAssecher(jCourant).get(i).getId() == getTuileChoisie().getId()) {
+                                jCourant.assecherTuile(getTuilesDispoAssecher(jCourant).get(i));
+                            }
+                        }
+                    }
+                }
+            }
 
         } else if (arg == Utils.Commandes.DONNER) {
+            this.action = Utils.Commandes.DONNER;
+            this.vueCourante().highlightCartes(cartesDonnables());
+
+        } else if (arg instanceof CarteTirage) {
+            if (action == Utils.Commandes.DONNER) {
+                if (jCourant.getPtsAction() > 0) {
+                    ArrayList<Aventurier> joueursDispo = getJoueursDispo();
+                    if (joueursDispo.size() > 0) {
+                        if (jCourant.getCartesEnMain().size() > 0) { //VERIFIER LES CARTES ACTIONS SPECIALES
+                            //demander quelle joueur il veut echanger (IHM)
+                            Aventurier receveur = getJoueurChoisi();//méthode IHM
+                            //lui afficher les joueur et lui faire chosir un joueur (IHM)
+                            for (int i = 0; i < joueursDispo.size(); i++) {
+                                //on parcourt la liste des joueurs dispo pour comparer avec celle que le joueur a choisit
+                                if (joueursDispo.get(i).getId() == getJoueurChoisi().getId()) {
+                                    jCourant.donnerCarte(joueursDispo.get(i), (CarteTirage) arg);
+                                    jCourant.actionEffectuee();
+                                }
+                            }
+                        } else {
+                            //Le joueur n'a pas de carte à donner
+                        }
+                    } else {
+                        //Le joueur ne peut donner de cartes à aucun joueur
+                    }
+                }
+            } else if (action == Utils.Commandes.JOUER_HELICO || action == Utils.Commandes.JOUER_SDS) {
+                System.out.println("jouerCarteActionSpeciale");
+                this.jouerCarteActionSpeciale((CarteTirage) arg);
+            }
+            
+        } else if (arg instanceof VueTuile) {
+            Tuile tuile = ((VueTuile) arg).getT();
+            System.out.println("Tuile choisie : "  + tuile.getNomTuile());
+            if (action == Utils.Commandes.BOUGER) {
+                    //lui afficher les case et lui faire chosir une case (IHM)
+                    for (int i = 0; i < getTuilesDispoBouger(jCourant).size(); i++) {
+                        //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
+                        if (getTuilesDispoBouger(jCourant).get(i).getId() == tuile.getId()) {
+                            jCourant.seDeplacer(getTuilesDispoBouger(jCourant).get(i));
+                            jCourant.actionEffectuee();
+                            System.out.println("Déplacement effectué");
+                        }
+                    }
+            }
+            
+            
+            
+        } else if (arg == Utils.Commandes.CHOISIR_TUILE) {
 
         } else if (arg == Utils.Commandes.RECUPERER_TRESOR) {
-
+            if (jCourant.getPtsAction() > 0) {
+                Utils.Tresor t = jCourant.getPosition().getTresor();
+                if (tresorDispo(t)) {
+                    CarteTresor c = new CarteTresor(t);
+                    for (int i = 0; i < 4; i++) {
+                        jCourant.defausser(c);
+                    }
+                    jCourant.gagnerTresor();
+                    jCourant.actionEffectuee();
+                    t.setDejaPris(true);
+                }
+            }
         } else if (arg == Utils.Commandes.TERMINER) {
             jCourant.resetPtsAction();
+            tirerCarteTresor();
+            tirerCarteInondation();
             int num = this.joueurs.indexOf(jCourant);                                       // On récupère le numéro du joueur dans l'ordre du tour
             if (num == this.joueurs.size() - 1) {                                               // Si c'était le dernier joueur
                 jCourant = this.joueurs.get(0);                                             // On refait le tour
             } else {
                 jCourant = this.joueurs.get(num++);                                           // Sinon on passe au joueur suivant
             }
-
-        } else if (arg == Utils.Commandes.RECEVOIR) {
-
-        } else if (arg == Utils.Commandes.CHOISIR_CARTE) {
-
-        } else if (arg == Utils.Commandes.CHOISIR_TUILE) {
+        } else if (arg instanceof CarteTirage) {
 
         } else if (arg == Utils.Commandes.DEPLACER) {
-
-        } else if (arg == Utils.Commandes.VOIR_DEFAUSSE) {
 
         } else if (arg == Utils.Commandes.QUITTER) {
             System.exit(0);
 
-        } else if (arg == Utils.Commandes.PIOCHER_INONDATION) {
-
-        } else if (arg == Utils.Commandes.PIOCHER_TRESOR) {
-
         } else if (arg == Utils.Commandes.JOUER_HELICO) {
-            
+            action = Utils.Commandes.JOUER_HELICO;
+            System.out.println("sélectionner la carte hélico à jouer");
         } else if (arg == Utils.Commandes.JOUER_SDS) {
-            
-        }
-
-        if (o instanceof VueAventurier) {
-            
+            action = Utils.Commandes.JOUER_SDS;
+            System.out.println("sélectionner la carte sac de sable à jouer");
         }
 
 //        public void ValidationJoueurs() {
@@ -190,112 +311,32 @@ public class Controleur implements Observer {
         return c;
     }
 
+    public void deroulementJeu() {
+        boolean partieFinie = false;
+        while (!partieFinie) {
+            deroulementTour();
+        }
+    }
+
     public void deroulementTour() {
         if (jCourant.getCartesEnMain().size() > 5) {
             while (jCourant.getCartesEnMain().size() > 5) {
                 DefausserCarteJoueur(choisirCarte());
             }
-            tirerCarteTresorDebut();
-        }
+            while (jCourant.getPtsAction() > 0) {
 
-        // ACTIONS 
-        Utils.Commandes action = Utils.Commandes.QUITTER;
+            }
+
+            tirerCarteTresor();
+            tirerCarteInondation();
+
+            // ACTIONS 
+            Utils.Commandes action = Utils.Commandes.QUITTER; // a remplacer par la methode IHM qui rendra l'action 
 //BOUGER
-        if (jCourant.getPtsAction() > 0) {
-        }
-        if (action == Utils.Commandes.BOUGER) { //action est un message retourné par une vue
-            if (getTuilesDispoBouger(jCourant).size() > 0) {
-                //demander quelle tuile il veut aller (IHM)
-                Tuile tuile = getTuileChoisie();
-                //lui afficher les case et lui faire chosir une case (IHM)
-                for (int i = 0; i < getTuilesDispoBouger(jCourant).size(); i++) {
-                    //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                    if (getTuilesDispoBouger(jCourant).get(i).getId() == tuile.getId()) {
-                        jCourant.seDeplacer(getTuilesDispoBouger(jCourant).get(i));
-                        jCourant.actionEffectuee();
-                    }
 
-                }
-            } else {
-                //Le joueur ne peut pas se déplacer
-            }
-        }
-
-        //ASSECHER           
-        if (action == Utils.Commandes.ASSECHER) {
-            if (getTuilesDispoAssecher(jCourant).size() > 0) {
-                //demander quelle tuile il veut assecher (IHM)
-                Tuile tuile = getTuileChoisie();//méthode IHM
-                //lui afficher les case et lui faire chosir une case (IHM)
-                for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
-                    //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                    if (getTuilesDispoAssecher(jCourant).get(i).getId() == tuile.getId()) {
-                        jCourant.assecherTuile(getTuilesDispoAssecher(jCourant).get(i));
-                        jCourant.actionEffectuee();
-                    }
-                }
-            } else {
-                //Le joueur ne peut pas assécher de tuiles
-            }
-        }
-
-        if (jCourant instanceof Ingénieur) {
-            if (getTuilesDispoAssecher(jCourant).size() > 0) {
-                //On lui demande si il veut assecher une deuxième tuile
-                // if oui
-                //demander quelle tuile il veut assecher (IHM)
-                Tuile tuile = getTuileChoisie();//méthode IHM
-                //lui afficher les case et lui faire chosir une case (IHM)
-                for (int i = 0; i < getTuilesDispoAssecher(jCourant).size(); i++) {
-                    //on parcourt la liste des tuiles dispo pour comparer avec celle que le joueur a choisit
-                    if (getTuilesDispoAssecher(jCourant).get(i).getId() == getTuileChoisie().getId()) {
-                        jCourant.assecherTuile(getTuilesDispoAssecher(jCourant).get(i));
-                    }
-                }
-            }
-        }
-
+            //ASSECHER           
 //DONNER            
-        if (action == Utils.Commandes.DONNER) {
-            ArrayList<Aventurier> joueursDispo = new ArrayList<>();
-            joueursDispo = getJoueursDispo();
-            if (joueursDispo.size() > 0) {
-                if (jCourant.getCartesEnMain().size() > 0) { //VERIFIER LES CARTES ACTIONS SPECIALES
-                    //demander quelle joueur il veut echanger (IHM)
-                    Aventurier receveur = getJoueurChoisi();//méthode IHM
-                    //lui afficher les joueur et lui faire chosir un joueur (IHM)
-                    for (int i = 0; i < joueursDispo.size(); i++) {
-                        //on parcourt la liste des joueurs dispo pour comparer avec celle que le joueur a choisit
-                        if (joueursDispo.get(i).getId() == getJoueurChoisi().getId()) {
-                            jCourant.donnerCarte(joueursDispo.get(i), choisirCarte());
-                            jCourant.actionEffectuee();
-                        }
-                    }
-                } else {
-                    //Le joueur n'a pas de carte à donner
-                }
-            } else {
-                //Le joueur ne peut donner de cartes à aucun joueur
-            }
-        }
-
 //RECUPERER TRESOR
-
-        /*
-
-
-         */
-        if (action == Utils.Commandes.RECUPERER_TRESOR) {
-            Utils.Tresor t = jCourant.getPosition().getTresor();
-            if (tresorDispo(t)) {
-                CarteTresor c = new CarteTresor(t);
-                for (int i = 0; i < 4; i++) {
-                    jCourant.defausser(c);
-                }
-                jCourant.gagnerTresor();
-                jCourant.actionEffectuee();
-                t.setDejaPris(true);
-            }
         }
     }
 
@@ -426,6 +467,37 @@ public class Controleur implements Observer {
         }
     }
 
+    private void jouerCarteActionSpeciale(CarteTirage carte) {
+        Tuile tuileDepart = null;
+        Tuile tuileArrivee = null;
+        ArrayList<Aventurier> joueursChoisis = new ArrayList<>();
+        if (carte instanceof CarteHelicoptere) {
+            getTuilesDispoHelico();
+            //IHM Mettre tuiles dispo en évidence
+            //Getter la case de départ
+            tuileDepart.getAventuriersDessus();
+            //IHM Mettre les joueurs en évidence     
+            //Getter le ou les joueurs = joueursChoisis
+            getTuilesDispoHelico().remove(tuileDepart);
+            //IHM Mettre les cases arrivées en évidence
+            //Getter la case arrivée
+            useHelico(tuileDepart, tuileArrivee, joueursChoisis);
+            jCourant.getCartesEnMain().remove(carte);
+            defausseTresor.add(carte);
+        }
+
+        if (carte instanceof CarteSacsDeSable) {
+            Tuile tuileAassecher = null;
+            getTuilesDispoSacDeSable();
+            //IHM Mettre les tuiles dispo en évidencee
+            //Getter la case a assecher 
+            useSacDeSable(tuileAassecher);
+            jCourant.getCartesEnMain().remove(carte);
+            defausseTresor.add(carte);
+
+        }
+    }
+
     private ArrayList<Tuile> getTuilesDispoSacDeSable() {
         ArrayList<Tuile> casesDispo = new ArrayList<>();
         for (int i = 0; i < grille.getGrille().size(); i++) {
@@ -443,14 +515,14 @@ public class Controleur implements Observer {
     private void tirerCarteTresorDebut() {
         for (int i = 0; i < 2; i++) {
             while (piocheTresor.get(piocheTresor.size() - 1) instanceof CarteMonteeDesEaux) {
-            Collections.shuffle(piocheTresor);
+                Collections.shuffle(piocheTresor);
             }
 
             jCourant.getCartesEnMain().add(piocheTresor.get(piocheTresor.size() - 1));
             piocheTresor.remove(piocheTresor.size() - 1);
-            
+
         }
-        
+
     }
 
     private void tirerCarteTresor() {
@@ -481,7 +553,7 @@ public class Controleur implements Observer {
 
     }
 
-    private void tirerCarteInnondation() {
+    private void tirerCarteInondation() {
         for (int i = 0; i < VueN.getNiveau() + 1; i++) {
             innonder(piocheInondation.get(piocheInondation.size() - 1));
             piocheInondation.remove(piocheInondation.size() - 1);
@@ -520,8 +592,7 @@ public class Controleur implements Observer {
     }
 
     private ArrayList<Aventurier> getJoueursDispo() {
-        ArrayList<Aventurier> joueursDispo = new ArrayList<>();
-        joueursDispo = joueurs;
+        ArrayList<Aventurier> joueursDispo = joueurs;
         if (jCourant instanceof Messager) {
             joueursDispo.remove(jCourant);
         } else {
@@ -543,6 +614,30 @@ public class Controleur implements Observer {
             }
         }
         return cartesActionEnMain;
+    }
+
+    private VueAventurier vueCourante() {
+        VueAventurier v = null;
+        if (VueJoueur1.getA() == this.jCourant) {
+            v = VueJoueur1;
+        } else if (VueJoueur2.getA() == this.jCourant) {
+            v = VueJoueur2;
+        } else if ((VueJoueur3 != null) && (VueJoueur3.getA() == this.jCourant)) {
+            v = VueJoueur3;
+        } else if ((VueJoueur4 != null) && (VueJoueur4.getA() == this.jCourant)) {
+            v = VueJoueur4;
+        }
+        return v;
+    }
+
+    private ArrayList<CarteTirage> cartesDonnables() {
+        ArrayList<CarteTirage> donnables = new ArrayList<>();
+        for (CarteTirage c : jCourant.getCartesEnMain()) {
+            if (!(c instanceof CarteHelicoptere) && !(c instanceof CarteSacsDeSable)) {
+                donnables.add(c);
+            }
+        }
+        return donnables;
     }
 
 }
