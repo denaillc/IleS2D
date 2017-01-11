@@ -111,10 +111,14 @@ public class Controleur implements Observer {
 
         } else if (arg == Utils.Commandes.PIOCHER_TRESOR) {
 
+        } else if (arg == Utils.Commandes.JOUER_HELICO) {
+            
+        } else if (arg == Utils.Commandes.JOUER_SDS) {
+            
         }
 
         if (o instanceof VueAventurier) {
-
+            
         }
 
 //        public void ValidationJoueurs() {
@@ -188,39 +192,10 @@ public class Controleur implements Observer {
 
     public void deroulementTour() {
         if (jCourant.getCartesEnMain().size() > 5) {
-//            System.out.println("Entrer un carte parmi les carte dans votre main pour la Défaussé ensuite ");
-//            Scanner sc = new Scanner(System.in);
-//            String nomcarteaDefausse;
-//            nomcarteaDefausse = sc.next();
-//            // Pour la version texte mais après on aura un ihm qui nous donnera directement une carte
-//            //if(getCarteaDefausse(jCourant).getId()==jCourant.getCartesEnMain().)
-
-            DefausserCarteJoueur(choisirCarte());
-
-            //System.out.println("Resaisir une carte, la carte n'est pas valide ");     
-            tirerCarteTresor();
-            tirerCarteTresor();
-
-            CarteTirage c = new CarteMonteeDesEaux();
-            if (jCourant.getCartesEnMain().contains(c)) {
-                VueN.setNiveau(VueN.getNiveau() + 1); // ++ ne fontione pas
-                tirerCarteInnondation();
-                jCourant.getCartesEnMain().remove(c); //lui retire la carte et le fait repioche
-                tirerCarteTresor();
-                /*
-            Piocher 2 cartes trésor 
-            si carte montée des eaux (> VueN.setNiveau(VueN.getNiveau()++)
-            cartes dans la main du jcourant
-            retirer les cartes de la pile
-            
-            piocher cartes inond autant que le niveau d'eau
-            pour chaque carte, inonder la tuile associée (ou la couler)
-            défausser les cartes inond
-            
-            fait
-                 */
+            while (jCourant.getCartesEnMain().size() > 5) {
+                DefausserCarteJoueur(choisirCarte());
             }
-
+            tirerCarteTresorDebut();
         }
 
         // ACTIONS 
@@ -427,7 +402,7 @@ public class Controleur implements Observer {
         this.piocheTresor.add(new CarteHelicoptere());
         //créer 2 cartes sacs de sable
         this.piocheTresor.add(new CarteSacsDeSable());
-        this.piocheTresor.add(new CarteHelicoptere());
+        this.piocheTresor.add(new CarteSacsDeSable());
 
         Collections.shuffle(piocheTresor);
     }
@@ -465,17 +440,45 @@ public class Controleur implements Observer {
         tuile.setEtatCourant(Utils.EtatTuile.ASSECHEE);
     }
 
-    private void tirerCarteTresor() { // pas la bonne Collection /!\
-        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size() - 1));
-        defausseTresor.remove(defausseTresor.size() - 1);
+    private void tirerCarteTresorDebut() {
+        for (int i = 0; i < 2; i++) {
+            while (piocheTresor.get(piocheTresor.size() - 1) instanceof CarteMonteeDesEaux) {
+            Collections.shuffle(piocheTresor);
+            }
 
-        while (defausseTresor.get(defausseTresor.size() - 1) instanceof CarteMonteeDesEaux) {
-            //MELANGER la carte
-            Collections.shuffle(defausseTresor);
+            jCourant.getCartesEnMain().add(piocheTresor.get(piocheTresor.size() - 1));
+            piocheTresor.remove(piocheTresor.size() - 1);
+            
+        }
+        
+    }
+
+    private void tirerCarteTresor() {
+//        jCourant.getCartesEnMain().add(piocheTresor.get(piocheTresor.size() - 1));
+//        piocheTresor.remove(piocheTresor.size() - 1);
+//
+//        while (defausseTresor.get(defausseTresor.size() - 1) instanceof CarteMonteeDesEaux) {
+//            Collections.shuffle(defausseTresor);
+//            
+//        }
+//
+//        jCourant.getCartesEnMain().add(piocheTresor.get(piocheTresor.size() - 1));
+//        piocheTresor.remove(piocheTresor.size() - 1);
+        for (int p = 0; p < 2; p++) {
+
+            if (piocheTresor.get(piocheTresor.size() - 1) instanceof CarteMonteeDesEaux) {
+                VueN.setNiveau(VueN.getNiveau() + 1);
+                Collections.shuffle(defausseInondation);
+
+                for (int i = 0; i < defausseInondation.size(); i++) { // Pour chaque carte innondation de la défausse, on la déplace dans la pioche
+                    piocheInondation.add(defausseInondation.get(i));
+                }
+                defausseInondation.clear();
+            } else {
+                jCourant.getCartesEnMain().add(piocheTresor.get(piocheTresor.size() - 1));
+            }
         }
 
-        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size() - 1));
-        defausseTresor.remove(defausseTresor.size() - 1);
     }
 
     private void tirerCarteInnondation() {
