@@ -6,6 +6,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import javafx.scene.layout.Border;
 import javax.swing.BorderFactory;
@@ -37,6 +40,8 @@ public class VueAventurier extends Observable {
     private JButton btnJump;
     private JButton btnHelico;
     private JButton btnSacDeSable;
+    
+    private ArrayList<JLabel> labels = new ArrayList<>();
     
     private ImageIcon done;
     private ImageIcon give;
@@ -98,7 +103,7 @@ public class VueAventurier extends Observable {
             @Override
             public void actionPerformed(ActionEvent e) {
                     setChanged();
-                    notifyObservers(Utils.Commandes.DEPLACER); // ? bouger  != deplacer
+                    notifyObservers(Utils.Commandes.BOUGER); // ? bouger  != deplacer
                     clearChanged();
             }
         });
@@ -131,14 +136,14 @@ public class VueAventurier extends Observable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setChanged();
-                notifyObservers(Utils.Commandes.BOUGER);
+                notifyObservers(Utils.Commandes.DEPLACER);
                 clearChanged();
             }
         });
         
         helico = new ImageIcon(util.Parameters.TRESORS+"helicoptere.png");
         btnHelico = new JButton(helico);
-        btnJump.addActionListener(new ActionListener() {
+        btnHelico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setChanged();
@@ -179,19 +184,51 @@ public class VueAventurier extends Observable {
         mainPanel.add(panelDroite, BorderLayout.EAST);
         
         window.add(mainPanel);
-        this.show();
+//        this.show();
+        
     }
             
     
     private void actualiserCartes() {
         panelCentre.removeAll();
         for(CarteTirage c : a.getCartesEnMain()) {
-            ImageIcon imgCarte = new ImageIcon(this.a.getCartesEnMain().get(0).getCheminImage());
+            ImageIcon imgCarte = new ImageIcon(a.getCartesEnMain().get(a.getCartesEnMain().indexOf(c)).getCheminImage());
             imgCarte.setImage(imgCarte.getImage().getScaledInstance(150, 150, 110)); //Crée une instance 100x100 de l'image
             JLabel labelCarte = new JLabel(imgCarte);
             labelCarte.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            labelCarte.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    setChanged();
+                    notifyObservers(c);
+                    clearChanged();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+                
+                
+            });
             panelCentre.add(labelCarte);
         }
+        
+    }
+    
+    public void highlightCartes(ArrayList<CarteTirage> c) {
+//        todo
     }
     
     
@@ -202,4 +239,14 @@ public class VueAventurier extends Observable {
     public void hide() {
         this.window.setVisible(false);
     }
+
+    public Aventurier getA() {
+        return a;
+    }
+
+    public void setA(Aventurier a) {
+        this.a = a;
+    }
+    
+    
 }

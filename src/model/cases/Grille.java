@@ -233,14 +233,16 @@ public class Grille {
                 }
             }
         }
-
+        for (Tuile tu : tuilesDispo) {
+            System.out.println("Tuile disponible : " + tu.getNomTuile());
+        }
         return tuilesDispo;
     }
 
     public Pair<Integer, Integer> trouverTuile(Tuile t) {
         Pair p = null;
-        for (int i = 1; i <= 6; i++) {
-            for (int j = 1; j <= 6; j++) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
                 if (this.getTuiles()[i][j] == t) {
                     p = new Pair(i, j);
 

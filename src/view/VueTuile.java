@@ -28,6 +28,7 @@ public class VueTuile extends JPanel {
     }
     
     public VueTuile() {
+        this.t = null;
     }
 
     private void afficherNormal() {

@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -40,9 +42,36 @@ public class VuePlateau extends Observable {
         this.mainPanel = new JPanel(new GridLayout(6,6));
         for (VueTuile tuile : plateau.getVuesTuiles()) {
             mainPanel.add(tuile);
+            if (tuile.getT() != null) {
+            tuile.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    setChanged();
+                    notifyObservers(tuile);
+                    clearChanged();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+                
+                
+            });
+        }
         }
         window.add(mainPanel);
-        
         
         
         this.show();

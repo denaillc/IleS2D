@@ -6,7 +6,6 @@ import util.Utils;
 
 public class CarteTresor extends CarteTirage {
     
-    private String nomCarte;
     private Utils.Tresor tresor; 
 //    ArrayList<CarteTirage> carteTresors ;
 
@@ -15,25 +14,13 @@ public class CarteTresor extends CarteTirage {
     
     
     public CarteTresor(Utils.Tresor t) {
-        super(t.name(), t.getPathPicture());
+        super(t.toString(), t.getPathPicture());
         this.tresor = t;
     }
 
 //    public CarteTresor() {
 //        super(null);
 //    }
-    
-    
-    
-
-
-    public String getNomCarte() {
-        return nomCarte;
-    }
-
-    public void setNomCarte(String nomCarte) {
-        this.nomCarte = nomCarte;
-    }
     
     
     
