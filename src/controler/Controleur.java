@@ -88,7 +88,7 @@ public class Controleur implements Observer {
         } else if (arg == Utils.Commandes.TERMINER) {
             jCourant.resetPtsAction();
             int num = this.joueurs.indexOf(jCourant);                                       // On récupère le numéro du joueur dans l'ordre du tour
-            if (num == this.joueurs.size()) {                                               // Si c'était le dernier joueur
+            if (num == this.joueurs.size()-1) {                                               // Si c'était le dernier joueur
                 jCourant = this.joueurs.get(0);                                             // On refait le tour
             } else {
                 jCourant = this.joueurs.get(num++);                                           // Sinon on passe au joueur suivant
