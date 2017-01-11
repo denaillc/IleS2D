@@ -1,5 +1,6 @@
 package model.aventuriers;
 
+import java.awt.Component;
 import model.cartes.CarteTirage;
 import java.util.*;
 import model.ObjetIdentifie;

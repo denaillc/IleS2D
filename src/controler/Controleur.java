@@ -88,7 +88,7 @@ public class Controleur implements Observer {
         } else if (arg == Utils.Commandes.TERMINER) {
             jCourant.resetPtsAction();
             int num = this.joueurs.indexOf(jCourant);                                       // On récupère le numéro du joueur dans l'ordre du tour
-            if (num == this.joueurs.size()-1) {                                               // Si c'était le dernier joueur
+            if (num == this.joueurs.size() - 1) {                                               // Si c'était le dernier joueur
                 jCourant = this.joueurs.get(0);                                             // On refait le tour
             } else {
                 jCourant = this.joueurs.get(num++);                                           // Sinon on passe au joueur suivant
@@ -200,14 +200,14 @@ public class Controleur implements Observer {
             //System.out.println("Resaisir une carte, la carte n'est pas valide ");     
             tirerCarteTresor();
             tirerCarteTresor();
-            
-            CarteTirage c = new CarteMonteeDesEaux() ;
-            if(jCourant.getCartesEnMain().contains(c)){
-            VueN.setNiveau(VueN.getNiveau()+1); // ++ ne fontione pas
-            tirerCarteInnondation();    
-                    jCourant.getCartesEnMain().remove(c); //lui retire la carte et le fait repioche
-                    tirerCarteTresor(); 
-             /*
+
+            CarteTirage c = new CarteMonteeDesEaux();
+            if (jCourant.getCartesEnMain().contains(c)) {
+                VueN.setNiveau(VueN.getNiveau() + 1); // ++ ne fontione pas
+                tirerCarteInnondation();
+                jCourant.getCartesEnMain().remove(c); //lui retire la carte et le fait repioche
+                tirerCarteTresor();
+                /*
             Piocher 2 cartes trésor 
             si carte montée des eaux (> VueN.setNiveau(VueN.getNiveau()++)
             cartes dans la main du jcourant
@@ -218,9 +218,9 @@ public class Controleur implements Observer {
             défausser les cartes inond
             
             fait
-             */               
+                 */
             }
-      
+
         }
 
         // ACTIONS 
@@ -282,8 +282,8 @@ public class Controleur implements Observer {
 
 //DONNER            
         if (action == Utils.Commandes.DONNER) {
-            ArrayList<Aventurier> joueursDispo = jCourant.getPosition().getAventuriersDessus();
-            joueursDispo.remove(jCourant);
+            ArrayList<Aventurier> joueursDispo = new ArrayList<>();
+            joueursDispo = getJoueursDispo();
             if (joueursDispo.size() > 0) {
                 if (jCourant.getCartesEnMain().size() > 0) { //VERIFIER LES CARTES ACTIONS SPECIALES
                     //demander quelle joueur il veut echanger (IHM)
@@ -466,23 +466,23 @@ public class Controleur implements Observer {
     }
 
     private void tirerCarteTresor() { // pas la bonne Collection /!\
-        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size()-1));
-        defausseTresor.remove(defausseTresor.size()-1);
+        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size() - 1));
+        defausseTresor.remove(defausseTresor.size() - 1);
 
-        while (defausseTresor.get(defausseTresor.size()-1) instanceof CarteMonteeDesEaux) {
+        while (defausseTresor.get(defausseTresor.size() - 1) instanceof CarteMonteeDesEaux) {
             //MELANGER la carte
             Collections.shuffle(defausseTresor);
         }
 
-        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size()-1));
-        defausseTresor.remove(defausseTresor.size()-1);
+        jCourant.getCartesEnMain().add(defausseTresor.get(defausseTresor.size() - 1));
+        defausseTresor.remove(defausseTresor.size() - 1);
     }
 
     private void tirerCarteInnondation() {
-        for (int i = 0; i < VueN.getNiveau()+1; i++) {
-            innonder(piocheInondation.get(piocheInondation.size()-1));
-            piocheInondation.remove(piocheInondation.size()-1);
-            defausseInondation.add(piocheInondation.get(piocheInondation.size()-1));
+        for (int i = 0; i < VueN.getNiveau() + 1; i++) {
+            innonder(piocheInondation.get(piocheInondation.size() - 1));
+            piocheInondation.remove(piocheInondation.size() - 1);
+            defausseInondation.add(piocheInondation.get(piocheInondation.size() - 1));
         }
     }
 
@@ -513,6 +513,33 @@ public class Controleur implements Observer {
      */
     private ArrayList<Tuile> getTuilesDispoBouger(Aventurier jCourant) {
         return grille.getAdjacents(jCourant);
+
+    }
+
+    private ArrayList<Aventurier> getJoueursDispo() {
+        ArrayList<Aventurier> joueursDispo = new ArrayList<>();
+        joueursDispo = joueurs;
+        if (jCourant instanceof Messager) {
+            joueursDispo.remove(jCourant);
+        } else {
+            joueursDispo = jCourant.getPosition().getAventuriersDessus();
+            joueursDispo.remove(jCourant);
+        }
+        return joueursDispo;
+    }
+
+    private ArrayList<CarteTirage> getCartesActionEnMain() {
+        ArrayList<CarteTirage> cartesActionEnMain = new ArrayList<>();
+        for (int i = 0; i < jCourant.getCartesEnMain().size(); i++) {
+            if (jCourant.getCartesEnMain().get(i) instanceof CarteHelicoptere) {
+                cartesActionEnMain.add(jCourant.getCartesEnMain().get(i));
+            }
+
+            if (jCourant.getCartesEnMain().get(i) instanceof CarteSacsDeSable) {
+                cartesActionEnMain.add(jCourant.getCartesEnMain().get(i));
+            }
+        }
+        return cartesActionEnMain;
     }
 
 }

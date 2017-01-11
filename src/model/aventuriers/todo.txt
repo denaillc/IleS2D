@@ -19,12 +19,8 @@ DONNER CARTE -> messager
 
 
 
-getCarteChoisie -> à faire
-getTuileChoisie -> à faire
-getTuilesDispoBouger ->fait 
-getTuiesDispoAssecher ->fait 
-getJoueursDispo == est sur la même case sauf pour le messager -> à faire
-getCartesActionsEnMain() -> à faire
+getCarteChoisie -> à faire IHM
+getTuileChoisie -> à faire IHM
 
 
 
